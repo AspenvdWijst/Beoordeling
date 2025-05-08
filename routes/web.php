@@ -7,9 +7,9 @@ Route::get('/', function (){
     return view('dashboard');
 })->name('dashboard')->middleware('auth');
 
-Route::get('/', function (){
-    return view('dashboard');
-})->name('home')->middleware('auth');
+//Route::get('/', function (){
+//    return view('dashboard');
+//})->name('home')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
