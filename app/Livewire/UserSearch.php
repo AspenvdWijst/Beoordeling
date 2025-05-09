@@ -13,8 +13,14 @@ class UserSearch extends Component
     {
         $users = [];
 
-        // Only search when input is not empty or just spaces
-        if (trim($this->search) !== '') {
+        if (auth()->user()->role_id === 2) {
+            if (trim($this->search) !== '') {
+                $users = User::where('email', 'like', '%' . $this->search . '%')
+                    ->where('role_id', 1)
+                    ->get();
+            }
+        }
+        elseif (trim($this->search) !== '') {
             $users = User::where('email', 'like', '%' . $this->search . '%')->get();
         }
 

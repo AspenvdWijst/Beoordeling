@@ -29,5 +29,12 @@ class DatabaseSeeder extends Seeder
             'password' => 'teacher',
             'role_id' => 2
         ]);
+
+        User::factory()->create([
+            'name' => 'Student',
+            'email' => 'student@windesheim.nl',
+            'password' => 'student',
+            'role_id' => 1
+        ]);
     }
 }
