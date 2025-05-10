@@ -1,15 +1,11 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
-Route::get('/', function (){
-    return view('dashboard');
-})->name('dashboard')->middleware('auth');
 
-Route::get('/', function (){
-    return view('dashboard');
-})->name('home')->middleware('auth');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
@@ -17,6 +13,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
+
+    Route::get('/', [RoleController::class, 'index'])->name('dashboard');
 });
 
 require __DIR__.'/auth.php';
