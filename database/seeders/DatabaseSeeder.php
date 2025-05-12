@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Item;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Couchbase\Role;
 use Illuminate\Database\Seeder;
@@ -15,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        Item::factory(10)->create();
 
         User::factory()->create([
             'name' => 'Admin',
@@ -23,6 +24,14 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin',
             'role_id' => 3
         ]);
+
+        User::factory()->create([
+            'name' => 'Admin2',
+            'email' => 'admin2@windesheim.nl',
+            'password' => 'admin',
+            'role_id' => 3
+        ]);
+
         User::factory()->create([
             'name' => 'Teacher',
             'email' => 'teacher@windesheim.nl',
