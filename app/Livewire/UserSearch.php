@@ -15,13 +15,13 @@ class UserSearch extends Component
 
         if (auth()->user()->role_id === 2) {
             if (trim($this->search) !== '') {
-                $users = User::where('email', 'like', '%' . $this->search . '%')
+                $users = User::where('name', 'like', '%' . $this->search . '%')
                     ->where('role_id', 1)
                     ->get();
             }
         }
         elseif (trim($this->search) !== '') {
-            $users = User::where('email', 'like', '%' . $this->search . '%')->get();
+            $users = User::where('name', 'like', '%' . $this->search . '%')->get();
         }
 
         return view('livewire.user-search', [
