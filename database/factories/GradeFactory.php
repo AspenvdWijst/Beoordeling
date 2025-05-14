@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Assignment;
-use App\Models\Student;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,7 +20,7 @@ class GradeFactory extends Factory
     {
         return [
             'assignment_id' => Assignment::inRandomOrder()->first()?->id ?? Assignment::factory(),
-            'student_id' => Student::inRandomOrder()->first()?->id ?? Student::factory(),
+            'student_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
             'grade' => $this->faker->randomFloat(2, 50, 100),
         ];
     }

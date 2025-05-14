@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Assignment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class AssignmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Assignment::factory(10)->create();
+        Assignment::factory(10)->create();
     }
 }
