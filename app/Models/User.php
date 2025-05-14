@@ -57,4 +57,26 @@ namespace App\Models;
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
     }
+
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+    }
+
+        public function grades()
+        {
+            return $this->belongsToMany(Grade::class);
+        }
+
+        public function assignments()
+        {
+            return $this->belongsToMany(Assignment::class);
+        }
+
+        public function subjects()
+        {
+            return $this->belongsToMany(Subject::class);
+        }
+
+
 }

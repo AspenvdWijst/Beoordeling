@@ -9,5 +9,20 @@ class Grade extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['assignment_id', 'student_id', 'grade'];
+    protected $fillable = ['assignment_id', 'student_id', 'grade', 'approved'];
+
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
+
+    public function assignment()
+    {
+        return $this->belongsTo(Assignment::class, 'assignment_id');
+    }
 }

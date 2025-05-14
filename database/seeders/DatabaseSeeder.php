@@ -16,44 +16,15 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@windesheim.nl',
-            'password' => 'admin',
-            'role_id' => 3
-        ]);
 
-        User::factory()->create([
-            'name' => 'Admin2',
-            'email' => 'admin2@windesheim.nl',
-            'password' => 'admin',
-            'role_id' => 3
-        ]);
-
-        User::factory()->create([
-            'name' => 'Teacher',
-            'email' => 'teacher@windesheim.nl',
-            'password' => 'teacher',
-            'role_id' => 2
-        ]);
-
-        User::factory()->create([
-            'name' => 'Student',
-            'email' => 'student@windesheim.nl',
-            'password' => 'student',
-            'role_id' => 1
-        ]);
 
         $this->call([
-            StudentsTableSeeder::class,
+            UserTableSeeder::class,
             SubjectsTableSeeder::class,
-            TeachersTableSeeder::class,
             AssignmentsTableSeeder::class,
             GradesTableSeeder::class,
-            AssignmentStudentTableSeeder::class,
-            AssignmentTeacherTableSeeder::class,
             StudentSubjectTableSeeder::class,
-            StudentTeacherTableSeeder::class,
+            AssignmentStudentTableSeeder::class,
             SubjectTeacherTableSeeder::class,
         ]);
     }

@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('assignment_id')->constrained('assignments');
-            $table->foreignId('student_id')->constrained('students');
+            $table->foreignId('student_id')->constrained('users');
             $table->float('grade')->nullable();
+            $table->boolean('approved')->default(false);
             $table->timestamps();
 
             $table->unique(['assignment_id', 'student_id']);

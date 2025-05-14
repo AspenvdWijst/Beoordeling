@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\Grade;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
     public function index()
     {
        if(auth()->user()->role_id == 3){
-           return view('admin.dashboard');
+           $grades = Grade::where('approved', false)->get();
+           return view('admin.dashboard')->with('grades', $grades);
        }
        elseif(auth()->user()->role_id == 2){
            return view('teacher.dashboard');
