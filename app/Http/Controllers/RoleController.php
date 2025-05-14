@@ -11,7 +11,7 @@ class RoleController extends Controller
     public function index()
     {
        if(auth()->user()->role_id == 3){
-           $grades = Grade::with('student', 'assignment')->get();
+           $grades = Grade::where('approved', false)->get();
            return view('admin.dashboard')->with('grades', $grades);
        }
        elseif(auth()->user()->role_id == 2){
