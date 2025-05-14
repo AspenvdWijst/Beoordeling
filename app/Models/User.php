@@ -57,4 +57,9 @@ namespace App\Models;
             ->map(fn (string $name) => Str::of($name)->substr(0, 1))
             ->implode('');
     }
+
+    public function approvals()
+    {
+        return $this->hasMany(Approval::class);
+    }
 }
