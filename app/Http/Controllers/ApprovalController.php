@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Approval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,8 +41,7 @@ class ApprovalController extends Controller
             return back()->with('error', 'You can only submit once two approvals have been made.');
         }
 
-        // Mark the item as submitted (or perform any other action)
-        $grade->update(['status' => 'submitted']);
+        $grade->update(['approved' => true]);
 
         return back()->with('success', 'Item has been submitted!');
     }

@@ -12,7 +12,7 @@ class RoleController extends Controller
     {
        if(auth()->user()->role_id == 3){
            $grades = Grade::with('student', 'assignment')->get();
-           return view('admin.dashboard', compact('grades'));
+           return view('admin.dashboard')->with('grades', $grades);
        }
        elseif(auth()->user()->role_id == 2){
            return view('teacher.dashboard');
