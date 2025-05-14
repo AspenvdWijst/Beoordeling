@@ -36,5 +36,18 @@ class DatabaseSeeder extends Seeder
             'password' => 'student',
             'role_id' => 1
         ]);
+
+        $this->call([
+            StudentsTableSeeder::class,
+            SubjectsTableSeeder::class,
+            TeachersTableSeeder::class,
+            AssignmentsTableSeeder::class,
+            GradesTableSeeder::class,
+            AssignmentStudentTableSeeder::class,
+            AssignmentTeacherTableSeeder::class,
+            StudentSubjectTableSeeder::class,
+            StudentTeacherTableSeeder::class,
+            SubjectTeacherTableSeeder::class,
+        ]);
     }
 }
