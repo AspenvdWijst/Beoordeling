@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Assignment;
+use App\Models\Student;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,16 +14,8 @@ class AssignmentStudentTableSeeder extends Seeder
      */
     public function run()
     {
-        $assignments = \App\Models\Assignment::all();
-        $students = \App\Models\Student::all();
+        $assignments = Assignment::all();
+        $students = Student::all();
 
-        foreach ($assignments as $assignment) {
-            foreach ($students as $student) {
-                \App\Models\AssignmentStudent::create([
-                    'assignment_id' => $assignment->id,
-                    'student_id' => $student->id,
-                ]);
-            }
-        }
     }
 }

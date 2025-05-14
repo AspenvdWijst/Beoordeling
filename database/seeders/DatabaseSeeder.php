@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Couchbase\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -23,6 +22,14 @@ class DatabaseSeeder extends Seeder
             'password' => 'admin',
             'role_id' => 3
         ]);
+
+        User::factory()->create([
+            'name' => 'Admin2',
+            'email' => 'admin2@windesheim.nl',
+            'password' => 'admin',
+            'role_id' => 3
+        ]);
+
         User::factory()->create([
             'name' => 'Teacher',
             'email' => 'teacher@windesheim.nl',

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Subject;
+use App\Models\Teacher;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,16 +14,8 @@ class SubjectTeacherTableSeeder extends Seeder
      */
     public function run()
     {
-        $subjects = \App\Models\Subject::all();
-        $teachers = \App\Models\Teacher::all();
+        $subjects = Subject::all();
+        $teachers = Teacher::all();
 
-        foreach ($subjects as $subject) {
-            foreach ($teachers as $teacher) {
-                \App\Models\SubjectTeacher::create([
-                    'subject_id' => $subject->id,
-                    'teacher_id' => $teacher->id,
-                ]);
-            }
-        }
     }
 }
