@@ -9,7 +9,7 @@ class Approval extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['item_id', 'user_id'];
+    protected $fillable = ['grade_id', 'user_id'];
 
     // Relationship to User
     public function user()
@@ -18,8 +18,8 @@ class Approval extends Model
     }
 
     // Relationship to Item
-    public function item()
+    public function grade()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Grade::class);
     }
 }

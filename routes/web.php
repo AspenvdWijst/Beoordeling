@@ -17,8 +17,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/', [RoleController::class, 'index'])->name('dashboard');
 
-    Route::post('/items/{item}/approve', [ApprovalController::class, 'approve'])->name('items.approve');
-    Route::post('/items/{item}/submit', [ApprovalController::class, 'submit'])->name('items.submit');
+    Route::post('/grades/{grade}/approve', [ApprovalController::class, 'approve'])->name('grades.approve');
+    Route::post('/grades/{grade}/submit', [ApprovalController::class, 'submit'])->name('grades.submit');
 });
 
 require __DIR__.'/auth.php';

@@ -10,4 +10,6 @@ class Teacher extends Model
 
 
     protected $fillable = ['teacher_name'];
+
+
 }

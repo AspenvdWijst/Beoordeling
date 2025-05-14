@@ -10,10 +10,10 @@ return new class extends Migration
     {
         Schema::create('approvals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')->constrained()->onDelete('cascade');  // Foreign to Item model
+            $table->foreignId('grade_id')->constrained()->onDelete('cascade');  // Foreign to Item model
             $table->foreignId('user_id')->constrained()->onDelete('cascade');  // Foreign to User model
             $table->timestamps();
-            $table->unique(['item_id', 'user_id']);
+            $table->unique(['grade_id', 'user_id']);
         });
     }
 

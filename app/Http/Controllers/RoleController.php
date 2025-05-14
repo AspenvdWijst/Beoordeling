@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
-use App\Models\Item;
+use App\Models\Grade;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -11,8 +11,8 @@ class RoleController extends Controller
     public function index()
     {
        if(auth()->user()->role_id == 3){
-           $items = Item::all();
-           return view('admin.dashboard', compact('items'));
+           $grades = Grade::with('student', 'assignment')->get();
+           return view('admin.dashboard', compact('grades'));
        }
        elseif(auth()->user()->role_id == 2){
            return view('teacher.dashboard');

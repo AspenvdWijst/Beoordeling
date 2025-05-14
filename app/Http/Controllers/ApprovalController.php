@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
+use App\Models\Grade;
+
 use App\Models\Approval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,12 +11,11 @@ use Illuminate\Support\Facades\Auth;
 class ApprovalController extends Controller
 {
     // Approve an item
-    public function approve(Item $item)
+    public function approve(Grade $grade)
     {
         $user = Auth::user();
 
-        // Check if the user has already approved the item
-        $existingApproval = $item->approvals()->where('user_id', $user->id)->first();
+        $existingApproval = $grade->approvals()->where('user_id', $user->id)->first();
 
         if ($existingApproval) {
             return back()->with('error', 'You have already approved this item.');
@@ -23,7 +23,7 @@ class ApprovalController extends Controller
 
         // Create a new approval record
         Approval::create([
-            'item_id' => $item->id,
+            'grade_id' => $grade->id,
             'user_id' => $user->id,
         ]);
 
@@ -31,10 +31,10 @@ class ApprovalController extends Controller
     }
 
     // Submit the item (only if it's the second approval)
-    public function submit(Item $item)
+    public function submit(Grade $grade)
     {
         // Check the number of approvals
-        $approvalCount = $item->approvals()->count();
+        $approvalCount = $grade->approvals()->count();
 
         // Ensure there are exactly 2 approvals
         if ($approvalCount !== 2) {
@@ -42,7 +42,7 @@ class ApprovalController extends Controller
         }
 
         // Mark the item as submitted (or perform any other action)
-        $item->update(['status' => 'submitted']);
+        $grade->update(['status' => 'submitted']);
 
         return back()->with('success', 'Item has been submitted!');
     }
