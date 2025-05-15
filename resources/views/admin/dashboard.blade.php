@@ -4,10 +4,8 @@
             <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
                 @livewire('dashboard-recent-teachers')
             </div>
-            <div class="relative aspect-video overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-                @if(auth()->user() && auth()->user()->role_id === 3 || 2)
-                    {{-- @livewire('dashboard-recent-students') --}}
-                @endif
+            <div class="relative aspect-video overflow-auto rounded-xl border border-neutral-200 dark:border-neutral-700">
+                @livewire('dashboard-recent-students')
             </div>
             <div class="relative overflow-auto aspect-video rounded-xl border border-neutral-200 dark:border-neutral-700">
                 @livewire('user-search')
