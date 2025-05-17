@@ -15,11 +15,19 @@ class ApprovalController extends Controller
     {
         $user = Auth::user();
 
-        $existingApproval = $grade->where('teacher1_id', $user->id)->first();
-
-        if ($existingApproval) {
+        if ($grade->teacher1_id === $user->id || $grade->teacher2_id === $user->id) {
             return back()->with('error', 'You have already approved this item.');
         }
+
+        if (empty($grade->teacher1_id)) {
+            $grade->teacher1_id = $user->id;
+        }
+
+        elseif (empty($grade->teacher2_id)) {
+            $grade->teacher2_id = $user->id;
+        }
+
+        $grade->save();
 
         return back()->with('success', 'Item approved!');
     }

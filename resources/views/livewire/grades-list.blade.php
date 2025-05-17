@@ -6,8 +6,8 @@
             <h2>{{ $grade->assignment?->assignment_name ?? 'Unknown' }}</h2>
 
             @php
+                $userHasApproved = in_array(auth()->id(), [$grade->teacher1_id, $grade->teacher2_id]);
                 $approvals = $grade->only(['teacher1_id', 'teacher2_id']);
-                $userHasApproved = $grade->find(auth()->id());
                 $approverCount = collect($approvals)->filter()->count();
             @endphp
 
