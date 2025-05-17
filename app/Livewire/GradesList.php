@@ -9,28 +9,30 @@ class GradesList extends Component
 {
     public $grades;
     public $search = '';
+    public $filteredGrades;
 
     public function mount($grades)
     {
-        $this->grades = $grades;  // Assume it's a collection
+        $this->grades = $grades;
+        $this->filteredGrades = $grades;
+    }
+
+    public function updatedSearch($value)
+    {
+        // Filter the collection by the search term
+        $this->filterGrades($value);
+    }
+
+    public function filterGrades($searchTerm = '')
+    {
+        $this->filteredGrades = $this->grades->filter(function ($grade) use ($searchTerm) {
+            return stripos($grade->student?->name ?? '', $searchTerm) !== false;
+        });
     }
 
     public function render()
     {
-        // Filter unapproved grades
-        $unapprovedGrades = $this->grades->filter(function ($grade) {
-            return !$grade->approved;
-        });
 
-        // If there's a search term, filter by student name in memory
-        if (trim($this->search) !== '') {
-            $unapprovedGrades = $unapprovedGrades->filter(function ($grade) {
-                return stripos($grade->student?->name ?? '', $this->search) !== false;
-            });
-        }
-
-        return view('livewire.grades-list', [
-            'grades' => $unapprovedGrades,  // Pass filtered grades to the view
-        ]);
+        return view('livewire.grades-list');
     }
 }
