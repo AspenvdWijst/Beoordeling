@@ -25,9 +25,38 @@ class GradesTableSeeder extends Seeder
                 Grade::factory()->create([
                     'assignment_id' => $assignment->id,
                     'student_id' => $student->id,
-                    'grade' => rand(40, 100)/10, // Random grade between 50 and 100
+                    'teacher1_id' => null,
+                    'teacher2_id' => null,
                 ]);
             }
         }
+
+        Grade::factory()->create([
+            'assignment_id' => 3,
+            'student_id' => 4,
+            'teacher1_id' => null,
+            'teacher2_id' => null,
+        ]);
+
+        Grade::factory()->create([
+            'assignment_id' => 2,
+            'student_id' => 4,
+            'teacher1_id' => null,
+            'teacher2_id' => null,
+        ]);
+
+        Grade::factory()->create([
+            'assignment_id' => 4,
+            'student_id' => 4,
+            'teacher1_id' => null,
+            'teacher2_id' => null,
+        ]);
+
+        Grade::factory()->create([
+            'assignment_id' => 1,
+            'student_id' => 4,
+            'teacher1_id' => null,
+            'teacher2_id' => null,
+        ]);
     }
 }

@@ -7,12 +7,13 @@ use Livewire\Component;
 
 class DashboardStudentSubjects extends Component
 {
-    public $studentSubjects;
+    public $grades;
 
     public function mount(){
 
         $student=Auth::user();
-        $this->studentSubjects = $student->grades;
+        $this->grades = $student->grades;
+
     }
 
     public function render()

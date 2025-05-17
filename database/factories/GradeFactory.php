@@ -23,7 +23,7 @@ class GradeFactory extends Factory
             'student_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
             'teacher1_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
             'teacher2_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
-            'grade' => $this->faker->randomFloat(2, 50, 100),
+            'grade' => $this->faker->randomFloat(1, 1, 10),
         ];
     }
 }

@@ -65,17 +65,17 @@ namespace App\Models;
 
         public function grades()
         {
-            return $this->belongsToMany(Grade::class);
+            return $this->hasMany(Grade::class, 'student_id');
         }
 
         public function assignments()
         {
-            return $this->belongsToMany(Assignment::class);
+            return $this->hasMany(Assignment::class);
         }
 
         public function subjects()
         {
-            return $this->belongsToMany(Subject::class);
+            return $this->hasMany(Subject::class);
         }
 
 
