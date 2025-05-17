@@ -12,25 +12,25 @@ class GradesList extends Component
 
     public function mount($grades)
     {
-        $this->grades = $grades;
+        $this->grades = $grades;  // Assume it's a collection
     }
 
     public function render()
     {
-        // Filter grades that are not approved
+        // Filter unapproved grades
         $unapprovedGrades = $this->grades->filter(function ($grade) {
             return !$grade->approved;
         });
 
-        // Apply the search filter only for student names
-        if (trim($this->search !== '')) {
+        // If there's a search term, filter by student name in memory
+        if (trim($this->search) !== '') {
             $unapprovedGrades = $unapprovedGrades->filter(function ($grade) {
                 return stripos($grade->student?->name ?? '', $this->search) !== false;
             });
         }
 
         return view('livewire.grades-list', [
-            'grades' => $unapprovedGrades,
+            'grades' => $unapprovedGrades,  // Pass filtered grades to the view
         ]);
     }
 }
