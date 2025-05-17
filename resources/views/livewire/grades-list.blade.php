@@ -6,9 +6,9 @@
             <h2>{{ $grade->assignment?->assignment_name ?? 'Unknown' }}</h2>
 
             @php
-                $approvals = $grade->approvals; // All approvals for this item
-                $userHasApproved = $approvals->contains('user_id', auth()->id());
-                $approverCount = $approvals->count();
+                $approvals = $grade->only(['teacher1_id', 'teacher2_id']);
+                $userHasApproved = $grade->find(auth()->id());
+                $approverCount = collect($approvals)->filter()->count();
             @endphp
 
             {{-- Show Approve button if the user has not approved yet --}}

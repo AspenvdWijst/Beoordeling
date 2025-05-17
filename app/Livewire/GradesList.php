@@ -15,7 +15,7 @@ class GradesList extends Component
     public function render()
     {
         $unapprovedGrades = $this->grades->filter(function ($grade) {
-            return $grade->approvals->count() < 2;
+            return !$grade->approved;
         });
 
         return view('livewire.grades-list', [

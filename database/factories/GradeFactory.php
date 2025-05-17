@@ -21,6 +21,8 @@ class GradeFactory extends Factory
         return [
             'assignment_id' => Assignment::inRandomOrder()->first()?->id ?? Assignment::factory(),
             'student_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'teacher1_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
+            'teacher2_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
             'grade' => $this->faker->randomFloat(2, 50, 100),
         ];
     }

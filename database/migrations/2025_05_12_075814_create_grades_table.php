@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('assignment_id')->constrained('assignments');
             $table->foreignId('student_id')->constrained('users');
+            $table->foreignId('teacher1_id')->constrained('users');
+            $table->foreignId('teacher2_id')->constrained('users');
             $table->float('grade')->nullable();
             $table->boolean('approved')->default(false);
             $table->timestamps();
