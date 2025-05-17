@@ -58,10 +58,7 @@ namespace App\Models;
             ->implode('');
     }
 
-    public function approvals()
-    {
-        return $this->hasMany(Approval::class);
-    }
+
 
         public function grades()
         {
@@ -70,12 +67,12 @@ namespace App\Models;
 
         public function assignments()
         {
-            return $this->hasMany(Assignment::class);
+            return $this->belongsToMany(Assignment::class);
         }
 
         public function subjects()
         {
-            return $this->hasMany(Subject::class);
+            return $this->belongsToMany(Subject::class, 'student_subject', 'student_id', 'subject_id');
         }
 
 

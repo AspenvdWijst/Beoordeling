@@ -1,13 +1,12 @@
 <div class="bg-white shadow rounded p-4">
-    <h2 class="text-xl font-semibold mb-4 dark:text-black">Alle cijfers</h2>
+    <h2 class="text-xl font-semibold mb-4 dark:text-black">Jouw vakken</h2>
     <ul>
-        @forelse($grades as $grade)
+        @forelse($subjects as $subject)
             <li class="border-b py-2 dark:text-black">
-                <strong>{{ $grade->grade }}</strong>
-{{--                <strong>{{ $grade-> }}</strong>--}}
+                <a><strong>{{ $subject->subject_name }}</strong></a>
             </li>
         @empty
-            <li class="dark:text-black">Geen cijfers gevonden.</li>
+            <li class="dark:text-black">Geen vakken gevonden.</li>
         @endforelse
     </ul>
 </div>
