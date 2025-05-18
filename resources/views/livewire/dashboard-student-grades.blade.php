@@ -4,6 +4,7 @@
         @forelse($grades as $grade)
             <li class="border-b py-2 dark:text-black">
                 <strong>{{ $grade->grade }}</strong>
+                <h2>{{ $grade->assignment?->subject?->subject_name ?? 'Unknown' }}</h2>
                 <h2>{{ $grade->assignment?->assignment_name ?? 'Unknown' }}</h2>
             </li>
         @empty
@@ -11,4 +12,6 @@
         @endforelse
     </ul>
 </div>
+
+
 

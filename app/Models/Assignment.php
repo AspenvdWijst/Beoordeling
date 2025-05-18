@@ -20,4 +20,9 @@ class Assignment extends Model
     {
         return $this->belongsToMany(Grade::class);
     }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

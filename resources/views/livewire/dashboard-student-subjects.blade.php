@@ -3,7 +3,7 @@
     <ul>
         @forelse($subjects as $subject)
             <li class="border-b py-2 dark:text-black">
-                <a><strong>{{ $subject->subject_name }}</strong></a>
+                <a class="cursor-pointer" href="{{ route('student.subject', $subject->id ) }}"><strong>{{ $subject->subject_name }}</strong></a>
             </li>
         @empty
             <li class="dark:text-black">Geen vakken gevonden.</li>
