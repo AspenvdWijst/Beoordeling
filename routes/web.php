@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -19,6 +20,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/grades/{grade}/approve', [ApprovalController::class, 'approve'])->name('grades.approve');
     Route::post('/grades/{grade}/submit', [ApprovalController::class, 'submit'])->name('grades.submit');
+
+    Route::get('/subjects/{subject}', [StudentController::class, 'subject'])->name('student.subject');
 });
 
 require __DIR__.'/auth.php';

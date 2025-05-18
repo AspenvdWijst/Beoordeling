@@ -11,10 +11,7 @@ class Grade extends Model
 
     protected $fillable = ['assignment_id', 'student_id', 'grade', 'approved'];
 
-    public function approvals()
-    {
-        return $this->hasMany(Approval::class);
-    }
+
 
     public function student()
     {

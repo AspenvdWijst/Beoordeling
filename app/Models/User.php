@@ -58,14 +58,11 @@ namespace App\Models;
             ->implode('');
     }
 
-    public function approvals()
-    {
-        return $this->hasMany(Approval::class);
-    }
+
 
         public function grades()
         {
-            return $this->belongsToMany(Grade::class);
+            return $this->hasMany(Grade::class, 'student_id');
         }
 
         public function assignments()
@@ -75,7 +72,7 @@ namespace App\Models;
 
         public function subjects()
         {
-            return $this->belongsToMany(Subject::class);
+            return $this->belongsToMany(Subject::class, 'student_subject', 'student_id', 'subject_id');
         }
 
 

@@ -15,17 +15,19 @@ class ApprovalController extends Controller
     {
         $user = Auth::user();
 
-        $existingApproval = $grade->approvals()->where('user_id', $user->id)->first();
-
-        if ($existingApproval) {
+        if ($grade->teacher1_id === $user->id || $grade->teacher2_id === $user->id) {
             return back()->with('error', 'You have already approved this item.');
         }
 
-        // Create a new approval record
-        Approval::create([
-            'grade_id' => $grade->id,
-            'user_id' => $user->id,
-        ]);
+        if (empty($grade->teacher1_id)) {
+            $grade->teacher1_id = $user->id;
+        }
+
+        elseif (empty($grade->teacher2_id)) {
+            $grade->teacher2_id = $user->id;
+        }
+
+        $grade->save();
 
         return back()->with('success', 'Item approved!');
     }
@@ -33,10 +35,10 @@ class ApprovalController extends Controller
     // Submit the item (only if it's the second approval)
     public function submit(Grade $grade)
     {
-        // Check the number of approvals
-        $approvalCount = $grade->approvals()->count();
+        $approvalCount = 0;
+        if ($grade->teacher1_id) $approvalCount++;
+        if ($grade->teacher2_id) $approvalCount++;
 
-        // Ensure there are exactly 2 approvals
         if ($approvalCount !== 2) {
             return back()->with('error', 'You can only submit once two approvals have been made.');
         }
