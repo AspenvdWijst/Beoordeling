@@ -15,6 +15,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
     Route::get('/', [RoleController::class, 'index'])->name('dashboard');
+
+    Route::get('/competentie', function (){
+        return view('grading-form');
+    })->name('grading-form')->middleware('auth');
 });
 
 require __DIR__.'/auth.php';
