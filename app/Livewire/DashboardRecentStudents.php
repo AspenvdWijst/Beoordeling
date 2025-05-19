@@ -13,7 +13,7 @@ class DashboardRecentStudents extends Component
     {
         $this->recentStudents = User::where('role_id', 1)
             ->latest()
-            ->take(4)
+            ->take(10)
             ->get();
     }
     public function render()

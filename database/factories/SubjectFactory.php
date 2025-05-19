@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Subject;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class SubjectFactory extends Factory
     {
         return [
             'subject_name' => $this->faker->word . ' Studies',
+            'student_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
         ];
     }
 }
