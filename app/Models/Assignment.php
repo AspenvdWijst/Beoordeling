@@ -18,11 +18,16 @@ class Assignment extends Model
 
     public function grades()
     {
-        return $this->belongsToMany(Grade::class);
+        return $this->hasMany(Grade::class, 'assignment_id');
     }
 
     public function subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function teachers()
+    {
+        return $this->belongsToMany(User::class, 'assignment_teacher', 'assignment_id', 'teacher_id');
     }
 }

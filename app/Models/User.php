@@ -67,13 +67,11 @@ namespace App\Models;
 
         public function assignments()
         {
-            return $this->belongsToMany(Assignment::class);
+            return $this->belongsToMany(Assignment::class, 'assignment_teacher', 'teacher_id', 'assignment_id');
         }
 
         public function subjects()
         {
-            return $this->belongsToMany(Subject::class, 'student_subject', 'student_id', 'subject_id');
+            return $this->belongsToMany(Subject::class, 'subject_teacher', 'teacher_id', 'subject_id');
         }
-
-
 }

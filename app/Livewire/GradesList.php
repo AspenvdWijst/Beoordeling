@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Grade;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class GradesList extends Component
 {
@@ -11,15 +12,28 @@ class GradesList extends Component
     public $search = '';
     public $filteredGrades;
 
-    public function mount($grades)
+    public function mount($grades = null)
     {
-        $this->grades = $grades;
-        $this->filteredGrades = $grades;
+        $user = Auth::user();
+
+        if ($user->role_id === 2) {
+            $assignmentIds = $user->assignments()->pluck('assignments.id')->toArray();
+
+
+
+            $this->grades = Grade::whereIn('assignment_id', $assignmentIds)
+                ->get();
+            dd($assignmentIds);
+
+        } else {
+            $this->grades = $grades ?? Grade::with(['student', 'assignment'])->get();
+        }
+
+        $this->filteredGrades = $this->grades;
     }
 
     public function updatedSearch($value)
     {
-        // Filter the collection by the search term
         $this->filterGrades($value);
     }
 
@@ -32,7 +46,6 @@ class GradesList extends Component
 
     public function render()
     {
-
         return view('livewire.grades-list');
     }
 }

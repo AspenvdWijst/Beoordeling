@@ -15,7 +15,8 @@ class RoleController extends Controller
            return view('admin.dashboard')->with('grades', $grades);
        }
        elseif(auth()->user()->role_id == 2){
-           return view('teacher.dashboard');
+           $grades = Grade::where('approved', false)->get();
+           return view('teacher.dashboard')->with('grades', $grades);
        }
         else{
             return view('student.dashboard');
