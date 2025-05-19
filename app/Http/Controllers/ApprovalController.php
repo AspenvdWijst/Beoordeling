@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Grade;
 use Illuminate\Support\Facades\DB;
 use App\Models\Approval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class ApprovalController extends Controller
 {
@@ -33,14 +35,22 @@ class ApprovalController extends Controller
     }
 
     // Submit the item (only if it's the second approval)
-    public function submit(Grade $grade)
+    public function submit(Grade $grade, Request $request)
     {
-        $approvalCount = 0;
-        if ($grade->teacher1_id) $approvalCount++;
-        if ($grade->teacher2_id) $approvalCount++;
+        if (auth()->user()->role_id === 2){
+            $approvalCount = 0;
+            if ($grade->teacher1_id) $approvalCount++;
+            if ($grade->teacher2_id) $approvalCount++;
 
-        if ($approvalCount !== 2) {
-            return back()->with('error', 'You can only submit once two approvals have been made.');
+            if ($approvalCount !== 2) {
+                return back()->with('error', 'You can only submit once two approvals have been made.');
+            }
+        }
+        else{
+            $newGrade = request('newGrade');
+            $newGrade = str_replace(',', '.', $newGrade);
+            $this->newGrade = (float) $newGrade;
+            $grade->grade = $this->newGrade;
         }
 
         $grade->update(['approved' => true]);
