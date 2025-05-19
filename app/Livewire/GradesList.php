@@ -17,7 +17,7 @@ class GradesList extends Component
         $user = Auth::user();
 
         if ($user->role_id === 2) {
-            $assignmentIds = $user->assignments()->pluck('assignments.id')->toArray();
+            $assignmentIds = $user->assignments()->pluck('assignments.id');
 
 
 
