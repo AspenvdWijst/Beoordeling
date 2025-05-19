@@ -74,4 +74,10 @@ namespace App\Models;
         {
             return $this->belongsToMany(Subject::class, 'subject_teacher', 'teacher_id', 'subject_id');
         }
+
+        public function studentSubjects()
+        {
+            return $this->belongsToMany(Subject::class, 'student_subject', 'student_id', 'subject_id');
+        }
+
 }

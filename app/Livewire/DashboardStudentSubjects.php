@@ -11,7 +11,7 @@ class DashboardStudentSubjects extends Component
 
     public function mount(){
         $student = Auth::user();
-        $this->subjects = $student->subjects;
+        $this->subjects = $student->studentSubjects;
     }
 
     public function render()
