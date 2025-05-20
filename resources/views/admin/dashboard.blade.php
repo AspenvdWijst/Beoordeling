@@ -11,8 +11,8 @@
                 @livewire('user-search')
             </div>
         </div>
-        <div class="relative aspect-video h-full flex-1 overflow-auto rounded-xl border border-neutral-200 dark:text-black dark:border-neutral-700">
-            @livewire('grades-list', ['grades' => $grades])
-        </div>
+            <div class="relative aspect-video h-full flex-1 overflow-auto rounded-xl border border-neutral-200 dark:text-black dark:border-neutral-700">
+                @livewire('grades-list', ['grades' => $grades])
+            </div>
     </div>
 </x-layouts.app>
