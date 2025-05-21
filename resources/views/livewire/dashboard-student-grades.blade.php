@@ -1,5 +1,5 @@
 <div class="bg-white shadow rounded p-4">
-    <h2 class="text-xl font-semibold mb-4 dark:text-black">Alle cijfers</h2>
+    <h2 class="text-xl font-semibold mb-4 dark:text-black">Recente cijfers</h2>
     <ul>
         @forelse($grades as $grade)
             <li class="border-b py-2 dark:text-black">

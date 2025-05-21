@@ -6,7 +6,7 @@
         <ul class="mt-2 border rounded p-2 bg-white dark:text-black">
             @foreach($filteredSubjects as $subject)
                 <div class="item">
-                    <a href="" class="cursor-pointer">
+                    <a href="{{ route('teacher.subject', $subject->id ) }}" class="cursor-pointer">
                         <h2>{{ $subject->subject_name }}</h2>
                     </a>
                     <br>

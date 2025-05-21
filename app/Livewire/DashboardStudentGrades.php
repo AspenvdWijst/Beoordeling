@@ -11,7 +11,7 @@ class DashboardStudentGrades extends Component
 
     public function mount(){
         $student = Auth::user();
-        $this->grades = $student->grades;
+        $this->grades = $student->grades()->orderBy('updated_at', 'desc')->get();
     }
 
     public function render()
