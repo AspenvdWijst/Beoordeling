@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Subject;
 use App\Models\Assignment;
 
@@ -16,5 +15,9 @@ class TeacherController extends Controller
 
     public function assignment(Subject $subject, Assignment $assignment){
         return view('teacher.assignment', compact('subject', 'assignment'));
+    }
+
+    public function addAssignment(Subject $subject){
+        return view('teacher.add', compact('subject'));
     }
 }
