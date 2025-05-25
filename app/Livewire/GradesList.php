@@ -23,7 +23,7 @@ class GradesList extends Component
 
             $this->grades = Grade::whereIn('assignment_id', $assignmentIds)
                 ->get();
-            dd($assignmentIds);
+            dd($this->grades);
 
         } else {
             $this->grades = $grades ?? Grade::with(['student', 'assignment'])->get();

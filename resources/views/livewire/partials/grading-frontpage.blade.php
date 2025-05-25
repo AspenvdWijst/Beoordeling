@@ -128,8 +128,15 @@
                                    class="w-full border border-gray-300 rounded px-2 py-1">
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
-                            <input wire:model="tables.{{ $tableIndex }}.pointRange" type="text" id="pointsRange" name="pointsRange"
-                                   class="w-full border border-gray-300 rounded px-2 py-1">
+                            @foreach($labels as $index => $label)
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="w-24 capitalize">{{ $label }}:</span>
+                                    <input wire:model="tables.{{ $tableIndex }}.pointRanges.{{ $index }}.min_points" type="number" min="0" max="25" class="border rounded px-2 py-1 w-16" placeholder="Min">
+                                    <span>-</span>
+                                    <input wire:model="tables.{{ $tableIndex }}.pointRanges.{{ $index }}.max_points" type="number" min="0" max="25" class="border rounded px-2 py-1 w-16" placeholder="Max">
+                                    <input type="hidden" wire:model="tables.{{ $tableIndex }}.pointRanges.{{ $index }}.label" value="{{ $label }}">
+                                </div>
+                            @endforeach
                         </td>
                     </tr>
                 @endforeach
@@ -148,45 +155,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
-    <div
-        class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
-        <table class="table-auto min-w-full border border-gray-400">
-            <thead>
-            <tr>
-                <th colspan="6" class="bg-blue-400 text-white text-lg py-3 text-center border border-gray-400">
-                    Competentieprofiel en niveaus
-                </th>
-                <th colspan="1" class="bg-blue-400 text-white text-lg py-3 text-center border border-gray-400">
-                    Beoordelingen
-                </th>
-                <th colspan="3" class="bg-blue-400 text-white text-lg py-3 text-center border border-gray-400">
-                    Controle
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="border border-gray-400">
-                <td class="border border-gray-400 p-3 bg-white">
-                    <label for="naam" class="block font-semibold mb-1">Activiteit</label>
-                </td>
-                <td class="border border-gray-400 p-3 bg-white">
-                    <label for="naam" class="block font-semibold mb-1">Analyseren</label>
-                </td>
-                <td class="border border-gray-400 p-3 bg-white">
-                    <label for="naam" class="block font-semibold mb-1">Adviseren</label>
-                </td>
-                <td class="border border-gray-400 p-3 bg-white">
-                    <label for="naam" class="block font-semibold mb-1">Ontwerpen</label>
-                </td>
-                <td class="border border-gray-400 p-3 bg-white">
-                    <label for="naam" class="block font-semibold mb-1">Realiseren</label>
-                </td>
-                <td class="border border-gray-400 p-3 bg-white">
-                    <label for="naam" class="block font-semibold mb-1">Manage & control</label>
-                </td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 </div>

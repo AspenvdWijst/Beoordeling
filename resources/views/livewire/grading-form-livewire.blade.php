@@ -14,7 +14,7 @@
 
         <div>
             @include('livewire.partials.grading-frontpage', ['tables' => $tables, 'grandTotal' => $this->getGrandTotalPoints(), 'maxObtainablePoints' => $this->maxObtainablePoints,
-    'minObtainablePoints' => $this->minObtainablePoints,])
+    'minObtainablePoints' => $this->minObtainablePoints])
         </div>
 
         <button type="button" wire:click="addTable" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded">
@@ -68,7 +68,7 @@
                                                class="w-full p-1 text-sm border border-gray-300 rounded"
                                                placeholder="Voer component in...">
                                         @error("tables.{{ $tableIndex }}.rows.{{ $rowIndex }}.component")
-                                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                                        <span class="text-red-500 text-xs">Geen componenten titel ingevuld</span>
                                         @enderror
                                     </td>
                                     <td class="border border-gray-300 p-2">
@@ -96,17 +96,10 @@
                                               placeholder="Voer goed criteria in..."></textarea>
                                     </td>
                                     <td class="border border-gray-300 p-2 text-center">
-                                        <input type="number"
-                                               wire:model.live="tables.{{ $tableIndex }}.rows.{{ $rowIndex }}.points"
-                                               class="w-16 p-1 text-sm border border-gray-300 rounded text-center"
-                                               min="0"
-                                               max="5">
+                                        <span class="font-semibold">0</span>
                                     </td>
                                     <td class="border border-gray-300 p-2">
-                                        <textarea wire:model="tables.{{ $tableIndex }}.rows.{{ $rowIndex }}.remarks"
-                                                  class="w-full p-1 text-sm border border-gray-300 rounded resize-none"
-                                                  rows="3"
-                                                  placeholder="Voer opmerkingen in..."></textarea>
+                                        <span class="font-semibold"></span>
                                         @if(count($table['rows']) > 1)
                                             <button type="button"
                                                     wire:click="removeRow({{ $tableIndex }}, {{ $rowIndex }})"
@@ -140,9 +133,6 @@
                                                wire:model="tables.{{ $tableIndex }}.deliverable_text"
                                                class="flex-1 p-2 border border-gray-300 rounded mr-4"
                                                placeholder="Deliverable tekst....">
-                                        <input type="checkbox"
-                                               wire:model="tables.{{ $tableIndex }}.deliverable_checked"
-                                               class="h-5 w-5 text-blue-600 rounded border-gray-300">
                                     </div>
                                     <hr class="border-black my-3">
                                     @foreach($table['knockoutCriteria'] as $koIndex => $criteria)
@@ -151,9 +141,6 @@
                                                    wire:model.live="tables.{{ $tableIndex }}.knockoutCriteria.{{ $koIndex }}.text"
                                                    class="flex-1 p-2 border border-gray-300 rounded mr-4"
                                                    placeholder="Voer knock-out criteria in...">
-                                            <input type="checkbox"
-                                                   wire:model.live="tables.{{ $tableIndex }}.knockoutCriteria.{{ $koIndex }}.checked"
-                                                   class="h-5 w-5 text-blue-600 rounded border-gray-300">
                                             @if(count($table['knockoutCriteria']) > 1)
                                                 <button type="button"
                                                         wire:click="removeKnockoutCriteria({{ $tableIndex }}, {{ $koIndex }})"

@@ -11,17 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grading_tables', function (Blueprint $table) {
+        Schema::create('grading_result_drafts', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
             $table->foreignId('grading_form_id')->constrained('grading_forms')->cascadeOnDelete();
-            $table->string('description_1')->nullable();
-            $table->string('description_2')->nullable();
-            $table->string('deliverable_text')->nullable();
-            $table->boolean('deliverable_checked')->default(false);
-            $table->integer('max_points')->default(0);
-            $table->integer('min_points')->default(0);
+            $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('teacher_id')->constrained('users')->cascadeOnDelete();
+            $table->json('draft_data');
             $table->timestamps();
+
+            $table->unique(['grading_form_id', 'student_id', 'teacher_id'], 'unique_draft');
         });
     }
 
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grading_tables');
+        Schema::dropIfExists('grading_result_drafts');
     }
 };
