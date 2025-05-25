@@ -17,14 +17,12 @@ class GradesList extends Component
         $user = Auth::user();
 
         if ($user->role_id === 2) {
-            $assignmentIds = $user->assignments()->pluck('assignments.id');
+            $assignmentIds = $user->assignments()->pluck('assignments.id')->values()->all();
 
 
 
             $this->grades = Grade::whereIn('assignment_id', $assignmentIds)
                 ->get();
-            dd($this->grades);
-
         } else {
             $this->grades = $grades ?? Grade::with(['student', 'assignment'])->get();
         }

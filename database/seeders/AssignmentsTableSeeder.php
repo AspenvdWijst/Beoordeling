@@ -13,6 +13,6 @@ class AssignmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        Assignment::factory(10)->create();
+        Assignment::factory(30)->create();
     }
 }

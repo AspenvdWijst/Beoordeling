@@ -15,6 +15,7 @@
                         <h2>{{ $grade->student?->name ?? 'Unknown' }}</h2>
                         <h2>{{ $grade->assignment?->assignment_name ?? 'Unknown' }}</h2>
 
+                @if(auth()->user()->role_id === 2)
                         @php
                             $userHasApproved = in_array(auth()->id(), [$grade->teacher1_id, $grade->teacher2_id]);
                             $approvals = $grade->only(['teacher1_id', 'teacher2_id']);
@@ -41,6 +42,13 @@
 
                         <p>Approvals: {{ $approverCount }}/2</p>
                         <br>
+                @else
+                        <form action="{{ route('grades.submit', $grade->id) }}" method="POST">
+                            <input type="text" name="newGrade" class="border p-2 rounded dark:text-black" placeholder="New grade" wire:model="newGrade" autocomplete="off">
+                            @csrf
+                            <button type="submit" class="btn btn-success text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Submit</button>
+                        </form>
+                @endif
                     </div>
                 @endforeach
             </ul>

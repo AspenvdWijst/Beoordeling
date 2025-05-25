@@ -22,7 +22,6 @@ class SubjectFactory extends Factory
     {
         return [
             'subject_name' => $this->faker->word . ' Studies',
-            'student_id' => User::inRandomOrder()->first()?->id ?? User::factory(),
         ];
     }
 }

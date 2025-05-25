@@ -70,8 +70,19 @@ namespace App\Models;
             return $this->belongsToMany(Assignment::class, 'assignment_teacher', 'teacher_id', 'assignment_id');
         }
 
+        public function assignmentsStudents()
+        {
+            return $this->belongsToMany(Assignment::class, 'assignment_student', 'student_id', 'assignment_id');
+        }
+
         public function subjects()
         {
             return $this->belongsToMany(Subject::class, 'subject_teacher', 'teacher_id', 'subject_id');
         }
+
+        public function studentSubjects()
+        {
+            return $this->belongsToMany(Subject::class, 'student_subject', 'student_id', 'subject_id');
+        }
+
 }

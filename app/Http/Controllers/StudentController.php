@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     public function subject(Subject $subject){
-        return view('student.subject', compact('subject'));
+        $assignments = $subject->assignments;
+
+        return view('student.subject', compact('subject', 'assignments'));
     }
 }
