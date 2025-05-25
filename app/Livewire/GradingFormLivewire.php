@@ -9,6 +9,7 @@ use Livewire\Component;
 class GradingFormLivewire extends Component
 {
     public $formTitle = '';
+    public $labels = ['onvoldoende', 'voldoende', 'goed'];
     public $tables = [];
     public $student = [
         'name' => '',
@@ -26,7 +27,6 @@ class GradingFormLivewire extends Component
     public $titleAssignment = '';
     public $retry = false;
     public $gradingDate = '';
-    public $pointRange = '';
 
     public function mount()
     {
@@ -57,6 +57,11 @@ class GradingFormLivewire extends Component
                         'text' => '',
                         'checked' => false
                     ]
+                ],
+                'pointRanges' => [
+                    ['label' => 'onvoldoende', 'min_points' => null, 'max_points' => null],
+                    ['label' => 'voldoende', 'min_points' => null, 'max_points' => null],
+                    ['label' => 'goed', 'min_points' => null, 'max_points' => null],
                 ]
             ]
         ];
@@ -89,6 +94,11 @@ class GradingFormLivewire extends Component
                     'text' => '',
                     'checked' => false
                 ]
+            ],
+            'pointRanges' => [
+                ['label' => 'onvoldoende', 'min_points' => null, 'max_points' => null],
+                ['label' => 'voldoende', 'min_points' => null, 'max_points' => null],
+                ['label' => 'goed', 'min_points' => null, 'max_points' => null],
             ]
         ];
     }
@@ -188,6 +198,7 @@ class GradingFormLivewire extends Component
 
     public function save()
     {
+        //TODO fix and add
         $this->validate([
             'formTitle' => 'required|string|max:255',
             'tables' => 'required|array|min:1',
@@ -201,13 +212,10 @@ class GradingFormLivewire extends Component
             'tables.*.rows.*.points' => 'required|numeric|min:0|max:5',
             'tables.*.rows.*.remarks' => 'nullable|string',
             'tables.*.knockoutCriteria' => 'array',
-            'tables.*.knockoutCriteria.*.text' => 'required_if:tables.*.knockoutCriteria.*.checked,true',
             'tables.*.description_1' => 'nullable|string|max:255',
             'tables.*.description_2' => 'nullable|string|max:255',
-            'tables.*.deliverable_text' => 'required_if:tables.*.deliverable_checked,true',
             'tables.*.maxObtainablePoints' => 'required|numeric|min:0',
             'tables.*.minObtainablePoints' => 'required|numeric|min:0',
-            'tables.*.pointRange' => 'nullable|string|max:255',
         ]);
 
         \DB::transaction(function () {
@@ -235,7 +243,6 @@ class GradingFormLivewire extends Component
                     'deliverable_checked' => $tableData['deliverable_checked'] ?? false,
                     'max_points' => $tableData['maxObtainablePoints'],
                     'min_points' => $tableData['minObtainablePoints'],
-                    'point_range' => $tableData['pointRange'] ?? '',
                 ]);
 
                 // Save all rows
@@ -246,8 +253,8 @@ class GradingFormLivewire extends Component
                         'insufficient' => $row['insufficient'] ?? '',
                         'sufficient'   => $row['sufficient'] ?? '',
                         'good'         => $row['good'] ?? '',
-                        'points'       => $row['points'] ?? 0,
-                        'remarks'      => $row['remarks'] ?? '',
+                        'points'       => 0,
+                        'remarks'      => '',
                     ]);
                 }
 
@@ -255,8 +262,18 @@ class GradingFormLivewire extends Component
                 foreach ($tableData['knockoutCriteria'] as $criteria) {
                     $table->knockoutCriteria()->create([
                         'text'    => $criteria['text'] ?? '',
-                        'checked' => $criteria['checked'] ?? false,
+                        'checked' => false,
                     ]);
+                }
+
+                if (isset($tableData['pointRanges'])) {
+                    foreach ($tableData['pointRanges'] as $range) {
+                        $table->pointRanges()->create([
+                            'label'      => $range['label'],
+                            'min_points' => $range['min_points'],
+                            'max_points' => $range['max_points'],
+                        ]);
+                    }
                 }
             }
         });

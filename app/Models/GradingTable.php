@@ -15,7 +15,6 @@ class GradingTable extends Model
         'deliverable_checked',
         'max_points',
         'min_points',
-        'point_range'
     ];
 
     public function form() {
@@ -30,5 +29,10 @@ class GradingTable extends Model
     public function knockoutCriteria(): HasMany
     {
         return $this->hasMany(KnockoutCriteria::class)->orderBy('order');
+    }
+
+    public function pointRanges(): HasMany
+    {
+        return $this->hasMany(TablePointsRange::class)->orderBy('order');
     }
 }
