@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use App\Models\Assignment;
+use Illuminate\Http\Request;
 
 class TeacherController extends Controller
 {
@@ -18,6 +19,6 @@ class TeacherController extends Controller
     }
 
     public function addAssignment(Subject $subject){
-        return view('teacher.add', compact('subject'));
+        return view('teacher.add-assignment', compact('subject'));
     }
 }

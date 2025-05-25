@@ -19,7 +19,7 @@ class GradesList extends Component
         if ($user->role_id === 2) {
             $assignmentIds = $user->assignments()->pluck('assignments.id')->values()->all();
 
-//            $assignmentIds = [1];
+
 
             $this->grades = Grade::whereIn('assignment_id', $assignmentIds)
                 ->get();
@@ -28,7 +28,6 @@ class GradesList extends Component
         }
 
         $this->filteredGrades = $this->grades;
-
     }
 
     public function updatedSearch($value)

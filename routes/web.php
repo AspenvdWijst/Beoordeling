@@ -5,6 +5,7 @@ use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -28,6 +29,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/teacher/subjects/{subject}/assignments/new', [TeacherController::class, 'addAssignment'])->name('new.assignment');
     Route::get('/teacher/subjects/{subject}/assignments/{assignment}', [TeacherController::class, 'assignment'])->name('teacher.assignment');
     Route::get('/teacher/subjects/{subject}/students/{student}', [SubjectController::class, 'student'])->name('add.student.subject');
+    Route::get('/assignment/add/{subject}', [AssignmentController::class, 'create'])->name('submit.new.assignment');
+    Route::get('/assignment/update/{subject}/{assignment}', [AssignmentController::class, 'update'])->name('update.assignment');
 
 
     Route::get('/competentie', function (){

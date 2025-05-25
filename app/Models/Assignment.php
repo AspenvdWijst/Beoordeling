@@ -13,7 +13,7 @@ class Assignment extends Model
 
     public function students()
     {
-        return $this->belongsToMany(User::class, 'assignment_student');
+        return $this->belongsToMany(User::class, 'assignment_student', 'assignment_id', 'student_id');
     }
 
     public function grades()
