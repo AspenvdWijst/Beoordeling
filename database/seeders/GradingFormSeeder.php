@@ -487,12 +487,15 @@ class GradingFormSeeder extends Seeder
             'student_number' => '',
             'company_name' => '',
             'company_place' => '',
-            'start_period' => '',
-            'end_period' => '',
+//            'start_period' => '',
+            'start_period' => null,
+//            'end_period' => '',
+            'end_period' => null,
             'oe_code' => '',
             'title_assignment' => '',
             'retry' => false,
-            'grading_date' => '',
+//            'grading_date' => '',
+            'grading_date' => null,
         ]);
 
         foreach ($tables as $table) {
