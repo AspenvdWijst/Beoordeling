@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Subject;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+use function Spatie\LaravelPdf\Support\pdf;
 
 
 class StudentController extends Controller
@@ -17,7 +17,12 @@ class StudentController extends Controller
     }
 
     public function download(Subject $subject,Assignment $assignment){
-        $pdf = Pdf::loadView('student.dashboard', [$subject, $assignment]);
-        return $pdf->download('invoice.pdf', ['Attachment' => false]);
+        return pdf()
+            ->view('student.dashboard', compact('subject', 'assignment'))
+            ->landscape()
+            ->name('invoice-2023-04-10.pdf');
     }
+
+
+
 }
