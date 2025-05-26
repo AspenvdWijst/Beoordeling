@@ -11,34 +11,40 @@ use Livewire\Component;
 class GradingTemplate extends Component
 {
     public $form = [];
-
+    public $teacherIds = [3,4];
     public $gradingFormId;
     public $studentId = 4;
 
     public function mount($gradingFormId)
     {
         $this->gradingFormId = $gradingFormId;
-        $gradingForm = GradingForm::with(['tables.criteriaRows', 'tables.knockoutcriteria', 'tables.pointRanges'])->find($this->gradingFormId);
+
+        $gradingForm = GradingForm::with(['tables.criteriaRows', 'tables.knockoutcriteria', 'tables.pointRanges'])
+            ->find($this->gradingFormId);
 
         if ($gradingForm) {
             $this->form = $gradingForm->toArray();
         }
 
-        $draft = GradingResultDraft::where([
-            'grading_form_id' => $this->gradingFormId,
-            'student_id' => $this->studentId,
-            'teacher_id' => Auth::id(),
-        ])->first();
+        if (in_array(Auth::id(), $this->teacherIds)) {
+            $draft = $this->getSharedDraft();
 
-        if ($draft) {
-            $this->form = $draft->draft_data;
+            if ($draft) {
+                $this->form = $draft->draft_data;
+            }
         }
     }
+
     public function setPoints($tableIndex, $rowIndex, $points)
     {
-        // Defensive: ensure indexes exist
+        if (!in_array(Auth::id(), $this->teacherIds)) {
+            session()->flash('error', 'U bent niet gemachtigd om dit formulier te bewerken.');
+            return;
+        }
+
         if (isset($this->form['tables'][$tableIndex]['criteria_rows'][$rowIndex])) {
             $this->form['tables'][$tableIndex]['criteria_rows'][$rowIndex]['points'] = $points;
+            $this->saveDraft();
         }
     }
 
@@ -72,45 +78,73 @@ class GradingTemplate extends Component
 
     public function pollDrafts()
     {
-        // Called via polling from frontend (JS or Livewire polling)
-        // Optionally, merge other teachers' drafts for display
-        $otherDrafts = GradingResultDraft::where('grading_form_id', $this->gradingFormId)
-            ->where('student_id', $this->studentId)
-            ->where('teacher_id', '!=', Auth::id())
-            ->get();
+        if (!in_array(Auth::id(), $this->teacherIds)) {
+            return;
+        }
 
-        // You can merge or display these drafts as needed
-        // For now, just emit an event or update a property
-        $this->emit('otherDraftsUpdated', $otherDrafts->toArray());
+        $draft = $this->getSharedDraft();
+
+        if ($draft) {
+            $this->form = $draft->draft_data;
+        }
+    }
+    public function updated($propertyName)
+    {
+
+        if (str_starts_with($propertyName, 'form.') && in_array(Auth::id(), $this->teacherIds)) {
+            if (str_contains($propertyName, '.points')) {
+                return;
+            }
+
+            $this->saveDraft();
+        }
     }
 
     public function saveDraft()
     {
-        GradingResultDraft::updateOrCreate(
-            [
+        if (!in_array(Auth::id(), $this->teacherIds)) {
+            session()->flash('error', 'U bent niet gemachtigd om dit formulier op te slaan.');
+            return;
+        }
+
+        try {
+            $draft = GradingResultDraft::firstOrCreate(
+                [
+                    'grading_form_id' => $this->gradingFormId,
+                    'student_id' => $this->studentId,
+                ],
+                [
+                    'draft_data' => $this->form,
+                ]
+            );
+
+            $draft->update(['draft_data' => $this->form]);
+
+            $draft->teachers()->sync($this->teacherIds);
+
+        } catch (\Exception $e) {
+            \Log::error('Failed to save draft', [
+                'error' => $e->getMessage(),
                 'grading_form_id' => $this->gradingFormId,
                 'student_id' => $this->studentId,
-                'teacher_id' => Auth::id(),
-            ],
-            [
-                'draft_data' => $this->form,
-            ]
-        );
-        session()->flash('message', 'Concept opgeslagen!');
+                'current_user' => Auth::id()
+            ]);
+
+            session()->flash('error', 'Fout bij opslaan: ' . $e->getMessage());
+        }
     }
 
     public function finalize()
     {
-        // Merge all drafts (simple example: take the latest from each teacher)
-        $drafts = GradingResultDraft::where('grading_form_id', $this->gradingFormId)
-            ->where('student_id', $this->studentId)
-            ->get();
+        if (!in_array(Auth::id(), $this->teacherIds)) {
+            session()->flash('error', 'U bent niet gemachtigd om dit formulier te finaliseren.');
+            return;
+        }
 
-        // Merge logic: here, just combine all tables/rows (customize as needed)
+        $draft = $this->getSharedDraft();
+
         $finalForm = $this->form;
-        foreach ($drafts as $draft) {
-            // Example: you could merge per-table, per-row, or use the latest
-            // For now, let's just take the latest draft as the final
+        if ($draft) {
             $finalForm = $draft->draft_data;
         }
 
@@ -120,12 +154,22 @@ class GradingTemplate extends Component
             'form_data' => $finalForm,
         ]);
 
-        // Optionally, delete drafts
-        GradingResultDraft::where('grading_form_id', $this->gradingFormId)
-            ->where('student_id', $this->studentId)
-            ->delete();
+        if ($draft) {
+            $draft->delete();
+        }
 
         session()->flash('message', 'Definitief opgeslagen!');
+    }
+
+    private function getSharedDraft()
+    {
+        return GradingResultDraft::where('grading_form_id', $this->gradingFormId)
+            ->where('student_id', $this->studentId)
+            ->whereHas('teachers', function($query) {
+                $query->whereIn('teacher_id', $this->teacherIds);
+            })
+            ->with('teachers')
+            ->first();
     }
 
     public function render()

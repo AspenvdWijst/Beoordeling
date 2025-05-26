@@ -5,7 +5,7 @@
         </div>
     @endif
 
-    <form wire:submit.prevent="finalize()">
+    <form wire:submit.prevent="finalize()" wire:poll.10s="pollDrafts">
         <div class="mb-6">
             <span class="font-bold">{{ $form['title'] }}</span>
         </div>
@@ -77,7 +77,11 @@
                                         <span>{{ $row['points'] ?? '' }}</span>
                                     </td>
                                     <td class="border border-gray-300 p-2">
-                                        <span>{{ $row['remarks'] ?? '' }}</span>
+                                        <textarea
+                                            wire:model.debounce.1000ms="form.tables.{{ $tableIndex }}.criteria_rows.{{ $rowIndex }}.remarks"
+                                            class="w-full border rounded p-1 text-xs resize-y"
+                                            rows="2"
+                                            placeholder="Opmerking..."></textarea>
                                     </td>
                                 </tr>
                             @endforeach
@@ -108,7 +112,7 @@
                                             @endif
                                         </span>
                                         <input type="checkbox"
-                                               wire:model="form.tables.{{ $tableIndex }}.deliverable_checked"
+                                               wire:model.debounce.1000ms="form.tables.{{ $tableIndex }}.deliverable_checked"
                                                class="h-5 w-5 text-blue-600 rounded border-gray-300">
                                     </div>
                                     <hr class="border-black my-3">
@@ -124,7 +128,7 @@
                                                     @endif
                                                 </span>
                                                 <input type="checkbox"
-                                                       wire:model="form.tables.{{ $tableIndex }}.knockoutcriteria.{{ $koIndex }}.checked"
+                                                       wire:model.debounce.1000ms="form.tables.{{ $tableIndex }}.knockoutcriteria.{{ $koIndex }}.checked"
                                                        class="h-5 w-5 text-blue-600 rounded border-gray-300">
                                             </div>
                                         @endforeach

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\FormStudentViewController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\GradingTemplateList;
 use App\Http\Controllers\AssignmentController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
@@ -39,6 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/grading-templates', [GradingTemplateList::class, 'index'])->name('grading-template.index');
     Route::get('/grading-template/{id}', [GradingTemplateList::class, 'show'])->name('grading-template.show');
+    Route::get('/student/form/{id}', [FormStudentViewController::class, 'show'])->name('student.form.show');
 
 });
 

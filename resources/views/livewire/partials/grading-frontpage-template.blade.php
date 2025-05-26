@@ -20,7 +20,7 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="student.name" type="text" id="studentName" name="studentName"
+                                <input wire:model.debounce.1000ms="form.student_name" type="text" id="studentName" name="studentName"
                                        placeholder="<naam student>"
                                        class="border border-gray-300 rounded px-2 py-1 w-full">
                             </div>
@@ -34,7 +34,7 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="student.number" type="text" id="studentNumber" name="studentNumber"
+                                <input wire:model.debounce.1000ms="form.student_number" type="text" id="studentNumber" name="studentNumber"
                                        placeholder="<studentnummer>"
                                        class="border border-gray-300 rounded px-2 py-1 w-full">
                             </div>
@@ -48,7 +48,7 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="gradingDate" type="date" id="gradingDate" name="gradingDate"
+                                <input wire:model.debounce.1000ms="form.grading_date" type="date" id="gradingDate" name="gradingDate"
                                        class="border border-gray-300 rounded px-2 py-1 w-full">
                             </div>
                         </td>
@@ -61,7 +61,7 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="OEcode" type="text" id="oeCode" name="oeCode" placeholder="<OE-code>"
+                                <input wire:model.debounce.1000ms="form.oe_code" type="text" id="oeCode" name="oeCode" placeholder="<OE-code>"
                                        class="border border-gray-300 rounded px-2 py-1 w-full">
                             </div>
                         </td>
@@ -75,10 +75,10 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="period.start" type="date" id="startPeriod" name="startPeriod"
+                                <input wire:model.debounce.1000ms="form.start_period" type="date" id="startPeriod" name="startPeriod"
                                        class="border border-gray-300 rounded px-2 py-1 w-1/3">
                                 <span class="font-semibold mb-0">tot</span>
-                                <input wire:model="period.end" type="date" id="endPeriod" name="endPeriod"
+                                <input wire:model.debounce.1000ms="form.end_period" type="date" id="endPeriod" name="endPeriod"
                                        class="border border-gray-300 rounded px-2 py-1 w-1/3">
                             </div>
                         </td>
@@ -91,7 +91,7 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="titleAssignment" type="text" id="titleAssignment"
+                                <input wire:model.debounce.1000ms="form.title_assignment" type="text" id="titleAssignment"
                                        name="titleAssignment" placeholder="<titel>"
                                        class="border border-gray-300 rounded px-2 py-1 w-full">
                             </div>
@@ -105,11 +105,11 @@
                         </td>
                         <td class="border border-gray-400 p-3 bg-white">
                             <div class="flex">
-                                <input wire:model="company.name" type="text" id="companyName" name="companyName"
+                                <input wire:model.debounce.1000ms="form.company_name" type="text" id="companyName" name="companyName"
                                        placeholder="<bedrijfsnaam>"
                                        class="border border-gray-300 rounded px-2 py-1 w-1/3">
                                 <span class="font-semibold mb-0">te</span>
-                                <input wire:model="company.place" type="text" id="companyPlace" name="companyPlace"
+                                <input wire:model.debounce.1000ms="form.company_place" type="text" id="companyPlace" name="companyPlace"
                                        placeholder="<plaats>"
                                        class="border border-gray-300 rounded px-2 py-1 w-1/3">
                             </div>
@@ -305,6 +305,14 @@
                             <span class="font-semibold">6,5</span>
                         </td>
                     </tr>
+                    <tr class="border border-gray-400">
+                        <td class="border border-gray-400 p-3 bg-white">
+                            <span class="font-semibold">84-89</span>
+                        </td>
+                        <td class="border border-gray-400 p-3 bg-white">
+                            <span class="font-semibold">6,5</span>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -315,13 +323,13 @@
                 <div
                     class="border border-blue-400 rounded-lg p-4 bg-blue-50 flex items-center gap-2 shadow-sm w-fit min-w-[160px]">
                     <span class="font-semibold text-blue-700">Herkansing:</span>
-                    <input wire:model="form.retry" type="checkbox" class="h-5 w-5"/>
+                    <input wire:model.debounce.500ms="form.retry" type="checkbox" class="h-5 w-5"/>
                 </div>
                 <!-- Beoordeling Box -->
                 <div
                     class="border border-blue-400 rounded-lg p-4 bg-blue-50 flex items-center gap-2 shadow-sm w-fit min-w-[160px]">
                     <span class="font-semibold text-blue-700">Beoordeling:</span>
-                    <input wire:model="form.finalGrade" type="number" min="0" max="10" step="0.5">
+                    <input wire:model.debounce.1000ms="form.finalGrade" type="number" min="0" max="10" step="0.5">
                 </div>
                 <!-- Ondertekening Box -->
                 <div

@@ -493,11 +493,9 @@ class GradingFormSeeder extends Seeder
             'title_assignment' => '',
             'retry' => false,
             'grading_date' => '',
-            // Add other fields as needed
         ]);
 
         foreach ($tables as $table) {
-            // Create the grading table
             $gradingTable = GradingTable::create([
                 'title' => $table['title'],
                 'grading_form_id' => $form->id,
@@ -509,7 +507,6 @@ class GradingFormSeeder extends Seeder
                 'min_points' => 12,
             ]);
 
-            // Create criteria rows for this table
             foreach ($table['rows'] as $order => $row) {
                 CriteriaRow::create([
                     'grading_table_id' => $gradingTable->id,
@@ -524,7 +521,6 @@ class GradingFormSeeder extends Seeder
                 ]);
             }
 
-            // Create knockout criteria for this table
             foreach ($table['knockoutCriteria'] as $order => $knockout) {
                 KnockoutCriteria::create([
                     'grading_table_id' => $gradingTable->id,
