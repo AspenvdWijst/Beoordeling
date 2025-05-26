@@ -1,5 +1,5 @@
 <h2>Add a new user</h2>
-<form method="POST", action="save">
+<form method="POST" action="save">
     @csrf
     Role
     <br>
@@ -16,7 +16,7 @@
 
     <br>
     <label for="user_email">Email<br></label>
-    <input type="text" id="user_email" name="user_email" required>
+    <input type="email" id="user_email" name="user_email" required>
 
     <br>
     <input type="submit">

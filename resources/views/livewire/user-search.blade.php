@@ -18,7 +18,7 @@
     @if($search)
         <ul class="mt-2 border rounded p-2 bg-white">
             @forelse($users as $user)
-                <li class="p-1 border-b last:border-0 dark:text-black"><a>{{ $user->name }}</a></li>
+                <li class="p-1 border-b last:border-0 dark:text-black"><a href="{{route("users.update", $user->id)}}">{{ $user->name }}</a></li>
             @empty
                 <li class="p-1 text-gray-500">No users found.</li>
             @endforelse

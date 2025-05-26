@@ -14,18 +14,25 @@ class UserController extends Controller
         return view('users.add');
     }
 
-    public function save(Request $request)
+    public function save(Request $request, User $user)
     {
-        \Illuminate\Log\log("Saving user");
-
-        $user = new User;
+        if ($user == Null) { $user = new User; }
 
         $user->role_id = (int)$request->role_id;
         $user->name = $request->user_name;
         $user->email = $request->user_email;
-        $user->password = 'temp'; // send email with automatically generated password
+        $user->password = 'temp'; // TODO: send email with automatically generated password
 
         $user->save();
-        return redirect('/');
+        return redirect('/')->with('success', 'User saved');
+    }
+
+    public function update(User $user) {
+        return view('users.update', compact('user'));
+    }
+
+    public function delete(User $user) {
+        $user->delete();
+        return redirect('/')->with('success', 'User has been deleted');
     }
 }

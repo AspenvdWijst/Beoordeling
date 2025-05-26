@@ -25,6 +25,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/users/add', [UserController::class, 'add'])->name('users.add');
     Route::post('/users/save', [UserController::class, 'save'])->name('users.save');
 
+    Route::get('/user/{user}/update', [UserController::class, 'update'])->name('users.update');
+    Route::post('/user/{user}/save', [UserController::class, 'save'])->name('users.save');
+    Route::get('/user/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
+
     Route::get('/subjects/{subject}', [StudentController::class, 'subject'])->name('student.subject');
 
     Route::get('/competentie', function (){
