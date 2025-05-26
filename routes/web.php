@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ApprovalController;
@@ -6,8 +7,10 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\GradingTemplateList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
+
 
 
 
@@ -25,6 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::get('/student/subjects/{subject}', [StudentController::class, 'subject'])->name('student.subject');
+    Route::get('/student/subjects/{subject}/assignments/{assignment}/download', [StudentController::class, 'download'])->name('student.download.grade');
+
     Route::get('/teacher/subjects/{subject}', [TeacherController::class, 'subject'])->name('teacher.subject');
     Route::get('/teacher/subjects/{subject}/assignments/new', [TeacherController::class, 'addAssignment'])->name('new.assignment');
     Route::get('/teacher/subjects/{subject}/assignments/{assignment}', [TeacherController::class, 'assignment'])->name('teacher.assignment');
