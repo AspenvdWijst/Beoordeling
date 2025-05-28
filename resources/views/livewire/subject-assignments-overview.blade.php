@@ -18,6 +18,7 @@
                             Edit Assignment
                         </a>
                     @endif
+                    <a href="{{ route('student.download.grade', [$subject->id, $assignment->id]) }}">download</a>
                 </div>
             @endforeach
         </ul>
