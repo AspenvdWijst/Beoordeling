@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_id')->constrained('subjects');
+            $table->foreignId('subject_id')->constrained('subjects')->cascadeOnDelete();
             $table->string('assignment_name');
             $table->text('assignment_info')->nullable();
             $table->timestamps();

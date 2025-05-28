@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('criteria_rows', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grading_table_id')->constrained()->onDelete('cascade');
+            $table->foreignId('grading_table_id')->constrained()->cascadeOnDelete();
             $table->string('component');
             $table->text('description')->nullable();
             $table->text('insufficient')->nullable();

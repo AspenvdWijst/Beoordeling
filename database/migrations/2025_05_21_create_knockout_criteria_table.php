@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('knockout_criterias', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('grading_table_id')->constrained()->onDelete('cascade');
+            $table->foreignId('grading_table_id')->constrained()->cascadeOnDelete();
             $table->string('text');
             $table->boolean('checked')->default(false);
             $table->integer('order')->default(0);

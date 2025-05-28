@@ -6,6 +6,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\GradingTemplateList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -31,6 +33,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/teacher/subjects/{subject}/students/{student}', [SubjectController::class, 'student'])->name('add.student.subject');
     Route::get('/assignment/add/{subject}', [AssignmentController::class, 'create'])->name('submit.new.assignment');
     Route::get('/assignment/update/{subject}/{assignment}', [AssignmentController::class, 'update'])->name('update.assignment');
+
+    Route::get('/user/{userid}', ['userid'])->name('users.add');
+
+    Route::get('/users/add', [UserController::class, 'add'])->name('users.add');
+    Route::post('/users/add', [UserController::class, 'add'])->name('users.add');
+    Route::post('/users/save', [UserController::class, 'save'])->name('users.save');
+
+    Route::get('/user/{user}/update', [UserController::class, 'update'])->name('users.update');
+    Route::post('/user/{user}/save', [UserController::class, 'save'])->name('users.save');
+    Route::get('/user/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
 
 
     Route::get('/competentie', function (){

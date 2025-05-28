@@ -18,10 +18,18 @@
     @if($search)
         <ul class="mt-2 border rounded p-2 bg-white">
             @forelse($users as $user)
-                <li class="p-1 border-b last:border-0 dark:text-black">{{ $user->name }}</li>
+                <li class="p-1 border-b last:border-0 dark:text-black"><a href="{{route("users.update", $user->id)}}">{{ $user->name }}</a></li>
             @empty
                 <li class="p-1 text-gray-500">No users found.</li>
             @endforelse
         </ul>
     @endif
+    <div class="pt-2">
+        <form action="{{ route('users.add') }}" method="POST">
+            @csrf
+            <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                Add new user
+            </button>
+        </form>
+    </div>
 </div>
