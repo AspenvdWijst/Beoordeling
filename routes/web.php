@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use App\Http\Middleware\Teacher;
+use App\Http\Middleware\Admin;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ApprovalController;
 use App\Http\Controllers\StudentController;
@@ -16,19 +18,29 @@ use Livewire\Volt\Volt;
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->name('dashboard');
+
     Route::redirect('settings', 'settings/profile');
 
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 
-    Route::get('/', [RoleController::class, 'index'])->name('dashboard');
-    Route::post('/grades/{grade}/approve', [ApprovalController::class, 'approve'])->name('grades.approve');
-    Route::post('/grades/{grade}/submit', [ApprovalController::class, 'submit'])->name('grades.submit');
-
-
     Route::get('/student/subjects/{subject}', [StudentController::class, 'subject'])->name('student.subject');
     Route::get('/student/subjects/{subject}/assignments/{assignment}/download', [StudentController::class, 'download'])->name('student.download.grade');
+
+    Route::get('/competentie', function (){
+        return view('grading-form');
+    })->name('grading-form');
+
+    Route::get('/grading-templates', [GradingTemplateList::class, 'index'])->name('grading-template.index');
+    Route::get('/grading-template/{id}', [GradingTemplateList::class, 'show'])->name('grading-template.show');
+
+});
+
+Route::middleware(['auth', 'verified', Teacher::class])->group(function () {
+    Route::post('/grades/{grade}/approve', [ApprovalController::class, 'approve'])->name('grades.approve');
+    Route::post('/grades/{grade}/submit', [ApprovalController::class, 'submit'])->name('grades.submit');
 
     Route::get('/teacher/subjects/{subject}', [TeacherController::class, 'subject'])->name('teacher.subject');
     Route::get('/teacher/subjects/{subject}/assignments/new', [TeacherController::class, 'addAssignment'])->name('new.assignment');
@@ -36,7 +48,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/teacher/subjects/{subject}/students/{student}', [SubjectController::class, 'student'])->name('add.student.subject');
     Route::get('/assignment/add/{subject}', [AssignmentController::class, 'create'])->name('submit.new.assignment');
     Route::get('/assignment/update/{subject}/{assignment}', [AssignmentController::class, 'update'])->name('update.assignment');
+});
 
+Route::middleware(['auth', 'verified', Admin::class])->group(function () {
     Route::get('/user/{userid}', ['userid'])->name('users.add');
 
     Route::get('/users/add', [UserController::class, 'add'])->name('users.add');
@@ -46,15 +60,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/user/{user}/update', [UserController::class, 'update'])->name('users.update');
     Route::post('/user/{user}/save', [UserController::class, 'save'])->name('users.save');
     Route::get('/user/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
-
-
-    Route::get('/competentie', function (){
-        return view('grading-form');
-    })->name('grading-form')->middleware('auth');
-
-    Route::get('/grading-templates', [GradingTemplateList::class, 'index'])->name('grading-template.index');
-    Route::get('/grading-template/{id}', [GradingTemplateList::class, 'show'])->name('grading-template.show');
-
 });
 
 require __DIR__.'/auth.php';
