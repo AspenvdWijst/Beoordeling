@@ -496,6 +496,7 @@ class GradingFormSeeder extends Seeder
             'retry' => false,
 //            'grading_date' => '',
             'grading_date' => null,
+            'assignment_id' => 1
         ]);
 
         foreach ($tables as $table) {

@@ -12,8 +12,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('grading_result_draft_id')->constrained()->cascadeOnDelete();
             $table->foreignId('teacher_id')->constrained('users')->cascadeOnDelete();
+            $table->boolean('approved')->default(false);
+            $table->timestamp('approved_at')->nullable();
             $table->timestamps();
-
             $table->unique(['grading_result_draft_id', 'teacher_id']);
         });
     }

@@ -24,9 +24,7 @@ return new class extends Migration
             $table->string('title_assignment');
             $table->boolean('retry')->default(false);
             $table->date('grading_date')->nullable();
-//            $table->foreignId('student_id')->constrained('users')->onDelete('cascade');
-//            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
-//            $table->foreignId('subject_id')->constrained('subjects')->onDelete('cascade');
+            $table->foreignId('assignment_id')->constrained('assignments')->cascadeOnDelete();
             $table->timestamps();
         });
     }

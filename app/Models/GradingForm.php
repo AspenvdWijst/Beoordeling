@@ -17,23 +17,15 @@ class GradingForm extends Model
         'oe_code',
         'title_assignment',
         'retry',
-        'grading_date'
-//        'student_id',
-//        'teacher_id',
-//        'subject_id',
+        'grading_date',
+        'assignment_id'
     ];
 
     public function tables() {
         return $this->hasMany(GradingTable::class);
     }
 
-    public function student()
-    {
-        return $this->belongsTo(User::class, 'student_id');
-    }
-
-    public function teacher()
-    {
-        return $this->belongsToMany(User::class, 'teacher_id');
+    public function assignment() {
+        return $this->belongsTo(Assignment::class);
     }
 }

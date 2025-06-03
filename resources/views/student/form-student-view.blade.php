@@ -1,83 +1,82 @@
 <x-layouts.app :title="__('grade')">
     <div class="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-        <div class="w-full max-w-2xl px-2 py-4">
+        <div class="w-full px-2 py-4">
             <div class="bg-white rounded-lg shadow p-4">
                 <div class="mb-6 text-center">
                     <span class="font-bold text-2xl">{{ $form['title'] ?? 'Beoordelingsformulier' }}</span>
                 </div>
 
-
                 <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
-                    <div class="grid auto-rows-min gap-4 md:grid-cols-2">
-                        <div class="relative aspect-video border-neutral-200 dark:border-neutral-700">
-                            <div class="overflow-x-auto">
-                                <table class="table-auto min-w-full border border-gray-400">
-                                    <thead>
-                                    <tr>
-                                        <th colspan="2"
-                                            class="bg-blue-400 text-white text-lg py-3 text-center border border-gray-400">
-                                            Gegevens
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="border border-gray-400">
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">Studentnaam:</td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['student_name'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    <tr class="border border-gray-400">
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">Studentnummer:
-                                        </td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['student_number'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">Datum
-                                            beoordeling:
-                                        </td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['grading_date'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    <tr class="border border-gray-400">
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">OE-code:</td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['oe_code'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">Datum aanvang
-                                            Comaker en einddatum:
-                                        </td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['start_period'] ?? '-' }} <span
-                                                class="font-semibold">tot</span> {{ $form['end_period'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    <tr class="border border-gray-400">
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">Titel opdracht:
-                                        </td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['title_assignment'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="border border-gray-400 p-3 bg-white font-semibold">Bedrijfsnaam en
-                                            -plaats:
-                                        </td>
-                                        <td class="border border-gray-400 p-3 bg-white">
-                                            {{ $form['company_name'] ?? '-' }} <span
-                                                class="font-semibold">te</span> {{ $form['company_place'] ?? '-' }}
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div
+                            class="border border-neutral-200 dark:border-neutral-700 overflow-x-auto bg-white dark:bg-neutral-800">
+                            <table class="table-auto min-w-full border border-gray-400">
+                                <thead>
+                                <tr>
+                                    <th colspan="2"
+                                        class="bg-blue-400 text-white text-lg py-3 text-center border border-gray-400">
+                                        Gegevens
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="border border-gray-400">
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">Studentnaam:</td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['student_name'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                <tr class="border border-gray-400">
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">Studentnummer:
+                                    </td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['student_number'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">Datum
+                                        beoordeling:
+                                    </td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['grading_date'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                <tr class="border border-gray-400">
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">OE-code:</td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['oe_code'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">Datum aanvang
+                                        Comaker en einddatum:
+                                    </td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['start_period'] ?? '-' }} <span
+                                            class="font-semibold">tot</span> {{ $form['end_period'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                <tr class="border border-gray-400">
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">Titel opdracht:
+                                    </td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['title_assignment'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-400 p-3 bg-white font-semibold">Bedrijfsnaam en
+                                        -plaats:
+                                    </td>
+                                    <td class="border border-gray-400 p-3 bg-white">
+                                        {{ $form['company_name'] ?? '-' }} <span
+                                            class="font-semibold">te</span> {{ $form['company_place'] ?? '-' }}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="relative aspect-video border-neutral-200 dark:border-neutral-700">
+                        <div
+                            class="border border-neutral-200 dark:border-neutral-700 overflow-x-auto bg-white dark:bg-neutral-800">
                             <table class="table-auto min-w-full border border-gray-400">
                                 <thead>
                                 <tr>
@@ -134,7 +133,7 @@
                         </div>
                     </div>
                     <div
-                        class="relative h-full flex-1 overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-700">
+                        class="border border-neutral-200 dark:border-neutral-700 overflow-x-auto bg-white dark:bg-neutral-800">
                         <table class="table-auto min-w-full border border-gray-400">
                             <thead>
                             <tr>
@@ -170,7 +169,6 @@
                                 </td>
                                 @for($i = 0; $i < 5; $i++)
                                     <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center">
-                                        {{-- Show value if available --}}
                                         {{ $form['competence_profile']['software'][$i] ?? '-' }}
                                     </td>
                                 @endfor
@@ -194,58 +192,140 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(isset($form['grade_conversion']) && is_array($form['grade_conversion']))
-                                        @foreach($form['grade_conversion'] as $conversion)
-                                            <tr class="border border-gray-400">
-                                                <td class="border border-gray-400 p-3 bg-white font-semibold">{{ $conversion['range'] }}</td>
-                                                <td class="border border-gray-400 p-3 bg-white font-semibold">{{ $conversion['grade'] }}</td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr class="border border-gray-400">
-                                            <td class="border border-gray-400 p-3 bg-white" colspan="2">Geen
-                                                conversietabel beschikbaar
-                                            </td>
-                                        </tr>
-                                    @endif
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">72-79</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">5.5</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">80-89</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">6</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">90-97</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">6.5</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">98-105</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">7</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">106-114</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">7.5</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">115-123</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">8</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">124-131</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">8.5</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">132-140</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">9</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">141-148</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">9.5</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="border border-gray-400">
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">149-150</span>
+                                        </td>
+                                        <td class="border border-gray-400 p-3 bg-white">
+                                            <span class="font-semibold">10</span>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="mt-4 flex flex-row gap-6">
-                                <div
-                                    class="border border-blue-400 rounded-lg p-4 bg-blue-50 flex items-center gap-2 shadow-sm w-fit min-w-[160px]">
-                                    <span class="font-semibold text-blue-700">Herkansing:</span>
-                                    <span>
+                                <div class="flex flex-col justify-center items-center bg-white rounded-xl px-6 py-4 shadow transition hover:shadow-md border border-gray-200 min-w-[160px]">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <svg class="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3"/>
+                                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                                        </svg>
+                                        <span class="font-semibold text-blue-700 text-base">Herkansing</span>
+                                    </div>
+                                    <span class="text-lg font-bold {{ !empty($form['retry']) ? 'text-green-600' : 'text-red-500' }}">
                                         @if(!empty($form['retry']))
-                                            &#10003;
+                                            <svg class="inline w-6 h-6 text-green-500" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                            </svg>
+                                            Ja
                                         @else
-                                            &#10007;
+                                            <svg class="inline w-6 h-6 text-red-500" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                                            </svg>
+                                            Nee
                                         @endif
                                     </span>
                                 </div>
-                                <div
-                                    class="border border-blue-400 rounded-lg p-4 bg-blue-50 flex items-center gap-2 shadow-sm w-fit min-w-[160px]">
-                                    <span class="font-semibold text-blue-700">Beoordeling:</span>
-                                    <span>{{ $form['finalGrade'] ?? '-' }}</span>
+                                <div class="flex flex-col items-center justify-center bg-white rounded-xl px-6 py-4 shadow transition hover:shadow-md border border-gray-200 min-w-[160px]">
+                                    <div class="flex items-center gap-2 mb-2">
+                                        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 17l-5 3 1.9-5.6L4 9.5l5.7-.4L12 4l2.3 5.1 5.7.4-4.9 4.9L17 20z"/>
+                                        </svg>
+                                        <span class="font-semibold text-yellow-700 text-base">Beoordeling</span>
+                                    </div>
+                                    <span class="text-2xl font-extrabold">
+                                        {{ $form['finalGrade'] ?? '-' }}
+                                    </span>
                                 </div>
-                                <div
-                                    class="border border-blue-400 rounded-lg p-4 bg-blue-50 flex flex-col items-center gap-2 shadow-sm w-fit min-w-[220px]">
-                                    <span class="font-semibold text-blue-700 mb-2">Ondertekening:</span>
-                                    <div class="flex flex-row gap-4">
-                                        <div class="flex flex-col items-center">
-                                            <span class="text-xs text-gray-500">Docent 1</span>
-                                            <div
-                                                class="h-12 w-24 border border-dashed border-gray-300 rounded flex items-center justify-center text-xs text-gray-400 bg-white">
-                                                {{ $form['signature_teacher_1'] ?? 'Geen handtekening' }}
+                                <div class="flex flex-col justify-center items-center gap-2 shadow-sm w-fit min-w-[220px] bg-white rounded-xl px-6 py-4 border border-gray-200">
+                                    <span class="font-semibold text-gray-700 mb-2 text-base">Ondertekening</span>
+                                    <div class="flex flex-row gap-6">
+                                        @foreach($form['assignment']['teachers'] ?? [] as $teacher)
+                                            <div class="flex flex-col items-center bg-gray-50 rounded-xl px-4 py-3 shadow transition hover:shadow-md">
+                                                <div class="mb-2 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-blue-400 text-white text-lg font-bold shadow-inner">
+                                                    {{ strtoupper(substr($teacher['name'], 0, 1)) }}
+                                                </div>
+                                                <span class="text-sm font-medium text-gray-800 mb-1">{{ $teacher['name'] ?? '-' }}</span>
+                                                <div class="flex items-center gap-1 mt-1 px-2 py-1 bg-green-100 border border-green-400 rounded-full text-green-700 font-semibold text-xs shadow">
+                                                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                                                    </svg>
+                                                    Goedgekeurd
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="flex flex-col items-center">
-                                            <span class="text-xs text-gray-500">Docent 2</span>
-                                            <div
-                                                class="h-12 w-24 border border-dashed border-gray-300 rounded flex items-center justify-center text-xs text-gray-400 bg-white">
-                                                {{ $form['signature_teacher_2'] ?? 'Geen handtekening' }}
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

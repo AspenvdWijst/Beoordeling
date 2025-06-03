@@ -35,13 +35,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/assignment/update/{subject}/{assignment}', [AssignmentController::class, 'update'])->name('update.assignment');
 
 
-    Route::get('/competentie', function (){
+    Route::get('/grading-form/create', function () {
         return view('grading-form');
-    })->name('grading-form')->middleware('auth');
+    })->name('grading-form.create');
+
+    Route::get('/grading-form/edit', function () {
+        return view('grading-form-edit');
+    })->name('grading-form.edit');
+
+    Route::get('/admin/grading-results', function () {
+        return view('admin.admin-grading-results-edit');
+    })->name('admin.grading-results');
 
     Route::get('/grading-templates', [GradingTemplateList::class, 'index'])->name('grading-template.index');
     Route::get('/grading-template/{id}', [GradingTemplateList::class, 'show'])->name('grading-template.show');
-    Route::get('/student/form/{id}', [FormStudentViewController::class, 'show'])->name('student.form.show');
+    Route::get('/student/form/{id}', [FormStudentViewController::class, 'show'])->name('student-form.show');
 
 });
 
