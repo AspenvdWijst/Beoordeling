@@ -3,21 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\GradingForm;
+use Illuminate\Support\Facades\Auth;
 
 class GradingTemplateList extends Controller
 {
     public function index()
     {
-        $templates = GradingForm::all();
+        $user = Auth::user();
+
+        if ($user->role_id == 3) {
+            $templates = GradingForm::all();
+        } elseif ($user->role_id == 2) {
+            $templates = GradingForm::whereHas('assignment.teachers', function ($query) use ($user) {
+                $query->where('teacher_id', $user->id);
+            })->get();
+        } else {
+            $templates = collect();
+        }
+
+
         return view('grading-template-list', compact('templates'));
     }
 
     public function show($id)
     {
-        // Optionally, you can check if the template exists:
         $form = GradingForm::findOrFail($id);
 
-        // Pass the template ID to the blade view
         return view('grading-view', ['formId' => $id]);
     }
 }

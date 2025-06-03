@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Assignment;
 use App\Models\GradingForm;
 use App\Models\GradingFormDraft;
 use Livewire\Component;
@@ -28,10 +29,37 @@ class GradingFormLivewire extends Component
     public $retry = false;
     public $gradingDate = '';
 
-    public function mount()
+    public $assignments = [];
+    public $selectedAssignment = null;
+
+    public $draftId = null;
+    public function mount($draftData = null, $draftId = null)
     {
-        // Initialize with one table by default
-        $this->tables = [
+        $this->assignments = Assignment::all();
+
+        if ($draftData) {
+            $this->formTitle = $draftData['formTitle'] ?? '';
+            $this->tables = $draftData['tables'] ?? $this->getDefaultTables();
+            $this->student = $draftData['student'] ?? ['name' => '', 'number' => ''];
+            $this->company = $draftData['company'] ?? ['name' => '', 'place' => ''];
+            $this->period = $draftData['period'] ?? ['start' => '', 'end' => ''];
+            $this->OEcode = $draftData['OEcode'] ?? '';
+            $this->titleAssignment = $draftData['titleAssignment'] ?? '';
+            $this->retry = $draftData['retry'] ?? false;
+            $this->gradingDate = $draftData['gradingDate'] ?? '';
+            $this->selectedAssignment = $draftData['assignment_id'] ?? null;
+        } else {
+            $this->tables = $this->getDefaultTables();
+        }
+
+        if ($draftId) {
+            $this->draftId = $draftId;
+        }
+    }
+
+    protected function getDefaultTables()
+    {
+        return [
             [
                 'title' => '',
                 'description_1' => '',
@@ -103,6 +131,53 @@ class GradingFormLivewire extends Component
         ];
     }
 
+    protected function rules()
+    {
+        return [
+            'formTitle' => 'required|string|max:255',
+            'selectedAssignment' => 'required|exists:assignments,id',
+
+            'tables' => 'required|array|min:1',
+            'tables.*.title' => 'required|string|max:255',
+            'tables.*.description_1' => 'nullable|string|max:255',
+            'tables.*.description_2' => 'nullable|string|max:255',
+            'tables.*.deliverable_text' => 'required|string|max:255',
+            'tables.*.maxObtainablePoints' => 'required|numeric|min:0',
+            'tables.*.minObtainablePoints' => 'required|numeric|min:0',
+            'tables.*.rows' => 'required|array|min:1',
+            'tables.*.rows.*.component' => 'required|string|max:255',
+            'tables.*.rows.*.description' => 'required|string|max:255',
+            'tables.*.rows.*.insufficient' => 'required|string|max:255',
+            'tables.*.rows.*.sufficient' => 'required|string|max:255',
+            'tables.*.rows.*.good' => 'required|string|max:255',
+            'tables.*.knockoutCriteria' => 'array|min:1',
+            'tables.*.knockoutCriteria.*.text' => 'required|string|max:255',
+            'tables.*.pointRanges' => 'array|size:3',
+            'tables.*.pointRanges.*.label' => 'required|string|max:50',
+            'tables.*.pointRanges.*.min_points' => 'required|numeric|min:0',
+            'tables.*.pointRanges.*.max_points' => 'required|numeric|min:0',
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'formTitle.required' => 'De titel van het formulier is verplicht.',
+            'selectedAssignment.required' => 'Selecteer een opdracht.',
+            'selectedAssignment.exists' => 'De geselecteerde opdracht bestaat niet.',
+
+            'tables.required' => 'Er moet minimaal één beoordelingscategorie zijn.',
+            'tables.*.title.required' => 'Elke tabel moet een titel hebben.',
+            'tables.*.rows.required' => 'Elke tabel moet minimaal één criterium hebben.',
+            'tables.*.rows.*.component.required' => 'Elke rij moet een component hebben.',
+            'tables.*.rows.*.description.required' => 'Elke rij moet een beschrijving hebben.',
+            'tables.*.rows.*.insufficient.required' => 'Elke rij moet een omschrijving voor onvoldoende hebben.',
+            'tables.*.rows.*.sufficient.required' => 'Elke rij moet een omschrijving voor voldoende hebben.',
+            'tables.*.rows.*.good.required' => 'Elke rij moet een omschrijving voor goed hebben.',
+            'tables.*.knockoutCriteria.*.text.required' => 'Elke knockout-criterium moet tekst bevatten.',
+            'tables.*.deliverable_text.required' => 'Elke deliverable moet tekst bevatten.',
+        ];
+    }
     public function removeTable($tableIndex)
     {
         unset($this->tables[$tableIndex]);
@@ -146,24 +221,6 @@ class GradingFormLivewire extends Component
         }
     }
 
-    public function getTotalPoints($tableIndex)
-    {
-        return collect($this->tables[$tableIndex]['rows'])->sum('points');
-    }
-
-    public function getGrandTotalPoints()
-    {
-        $total = 0;
-        foreach ($this->tables as $table) {
-            if (isset($table['rows']) && is_array($table['rows'])) {
-                foreach ($table['rows'] as $row) {
-                    $total += isset($row['points']) ? (float)$row['points'] : 0;
-                }
-            }
-        }
-        return $total;
-    }
-
     public function getMaxObtainablePointsProperty()
     {
         return collect($this->tables)->sum('maxObtainablePoints');
@@ -174,52 +231,61 @@ class GradingFormLivewire extends Component
         return collect($this->tables)->sum('minObtainablePoints');
     }
 
-    public function saveDraft() //TODO add $teacherIds when teacher link is complete
+    public function saveDraft()
     {
-        $draft = GradingFormDraft::create([
-            'title' => $this->formTitle,
-            'form_data' => [
-                'formTitle' => $this->formTitle,
-                'tables' => $this->tables,
-                'student' => $this->student,
-                'company' => $this->company,
-                'period' => $this->period,
-                'OEcode' => $this->OEcode,
-                'titleAssignment' => $this->titleAssignment,
-                'retry' => $this->retry,
-                'gradingDate' => $this->gradingDate,
-                'pointRange' => $this->pointRange,
-            ],
-        ]);
-//        $draft->teachers()->sync($teacherIds);
+        if ($this->draftId) {
+            $draft = GradingFormDraft::find($this->draftId);
+            if ($draft) {
+                $draft->update([
+                    'title' => $this->formTitle,
+                    'form_data' => [
+                        'formTitle' => $this->formTitle,
+                        'tables' => $this->tables,
+                        'student' => $this->student,
+                        'company' => $this->company,
+                        'period' => $this->period,
+                        'OEcode' => $this->OEcode,
+                        'titleAssignment' => $this->titleAssignment,
+                        'retry' => $this->retry,
+                        'gradingDate' => $this->gradingDate,
+                        'assignment_id' => $this->selectedAssignment,
+                    ],
+                ]);
+            }
+        } else {
+            $draft = GradingFormDraft::create([
+                'title' => $this->formTitle,
+                'form_data' => [
+                    'formTitle' => $this->formTitle,
+                    'tables' => $this->tables,
+                    'student' => $this->student,
+                    'company' => $this->company,
+                    'period' => $this->period,
+                    'OEcode' => $this->OEcode,
+                    'titleAssignment' => $this->titleAssignment,
+                    'retry' => $this->retry,
+                    'gradingDate' => $this->gradingDate,
+                    'assignment_id' => $this->selectedAssignment,
+                ],
+            ]);
+            $this->draftId = $draft->id;
+        }
 
         session()->flash('message', 'Concept opgeslagen!');
+        $this->dispatch('delayed-redirect', url()->route('dashboard'));
     }
 
     public function save()
     {
-        //TODO fix and add
-        $this->validate([
-            'formTitle' => 'required|string|max:255',
-            'tables' => 'required|array|min:1',
-            'tables.*.title' => 'required|string|max:255',
-            'tables.*.rows' => 'required|array|min:1',
-            'tables.*.rows.*.component' => 'required|string',
-            'tables.*.rows.*.description' => 'required|string',
-            'tables.*.rows.*.insufficient' => 'required|string',
-            'tables.*.rows.*.sufficient' => 'required|string',
-            'tables.*.rows.*.good' => 'required|string',
-            'tables.*.rows.*.points' => 'required|numeric|min:0|max:5',
-            'tables.*.rows.*.remarks' => 'nullable|string',
-            'tables.*.knockoutCriteria' => 'array',
-            'tables.*.description_1' => 'nullable|string|max:255',
-            'tables.*.description_2' => 'nullable|string|max:255',
-            'tables.*.maxObtainablePoints' => 'required|numeric|min:0',
-            'tables.*.minObtainablePoints' => 'required|numeric|min:0',
-        ]);
+        try {
+            $this->validate();
+        } catch (\Exception $e) {
+            session()->flash('error', 'Er zijn validatiefouten. Controleer alle velden voordat u goedkeurd.');
+            $this->validate();
+            return;
+        }
 
         \DB::transaction(function () {
-            // Create the grading form
             $form = GradingForm::create([
                 'title' => $this->formTitle,
                 'student_name' => $this->student['name'],
@@ -229,9 +295,10 @@ class GradingFormLivewire extends Component
                 'start_period' => $this->period['start'],
                 'end_period' => $this->period['end'],
                 'oe_code' => $this->OEcode,
-                'title_assignment' => $this->titleAssignment,
+                'title_assignment' => (int) $this->titleAssignment,
                 'retry' => $this->retry ?? false,
                 'grading_date' => $this->gradingDate,
+                'assignment_id' => $this->selectedAssignment,
             ]);
 
             foreach ($this->tables as $tableData) {
@@ -277,6 +344,12 @@ class GradingFormLivewire extends Component
                 }
             }
         });
+
+        if ($this->draftId) {
+            GradingFormDraft::where('id', $this->draftId)->delete();
+        }
+
+        $this->dispatch('delayed-redirect', url()->route('dashboard'));
 
         session()->flash('message', 'Beoordeling succesvol opgeslagen!');
     }

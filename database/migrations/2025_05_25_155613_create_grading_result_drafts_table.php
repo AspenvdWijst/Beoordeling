@@ -15,11 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('grading_form_id')->constrained('grading_forms')->cascadeOnDelete();
             $table->foreignId('student_id')->constrained('users')->cascadeOnDelete();
-            $table->foreignId('teacher_id')->constrained('users')->cascadeOnDelete();
             $table->json('draft_data');
             $table->timestamps();
 
-            $table->unique(['grading_form_id', 'student_id', 'teacher_id'], 'unique_draft');
+//            $table->unique(['grading_form_id', 'student_id', 'teacher_ids'], 'unique_draft');
         });
     }
 

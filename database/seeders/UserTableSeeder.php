@@ -35,6 +35,13 @@ class UserTableSeeder extends Seeder
         ]);
 
         User::factory()->create([
+            'name' => 'Teacher2',
+            'email' => 'teacher2@windesheim.nl',
+            'password' => 'teacher2',
+            'role_id' => 2
+        ]);
+
+        User::factory()->create([
             'name' => 'Student',
             'email' => 'student@windesheim.nl',
             'password' => 'student',
