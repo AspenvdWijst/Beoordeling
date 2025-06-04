@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Approval;
-use function Psy\debug;
 
 class UserController extends Controller
 {
@@ -21,7 +19,7 @@ class UserController extends Controller
         $user->role_id = (int)$request->role_id;
         $user->name = $request->user_name;
         $user->email = $request->user_email;
-        $user->password = 'temp'; // TODO: send email with automatically generated password
+        $user->password = 'temp';
 
         $user->save();
         return redirect('/')->with('success', 'User saved');

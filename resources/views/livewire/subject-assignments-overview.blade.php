@@ -6,7 +6,7 @@
             @if(auth()->user()->role_id == 2)
                 <div class="py-3">
                     <a href="{{ route('new.assignment', [$subject->id] ) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        Make Assignment
+                        Maak opdracht
                     </a>
                 </div>
             @endif
@@ -15,7 +15,7 @@
                     <strong>{{ $assignment->assignment_name }}</strong>
                     @if(auth()->user()->role_id == 2)
                         <a href="{{ route('teacher.assignment', [$subject->id, $assignment->id] ) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            Edit Assignment
+                            Bewerk opdracht
                         </a>
                     @endif
                     <a href="{{ route('student.download.grade', [$subject->id, $assignment->id]) }}">download</a>
@@ -23,6 +23,6 @@
             @endforeach
         </ul>
     @else
-        <p class="text-sm text-gray-500">No assignments found for this subject.</p>
+        <p class="text-sm text-gray-500">Geen opdrachten gevonden voor dit vak.</p>
     @endif
 </div>

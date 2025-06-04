@@ -1,5 +1,5 @@
 <div class="bg-white shadow rounded p-4">
-    <input type="text" wire:model.live.debounce.500ms="search" placeholder="Search classes..."
+    <input type="text" wire:model.live.debounce.500ms="search" placeholder="Zoek vakken..."
            class="border p-2 rounded w-full dark:text-black">
 
     <div class="items p-3 mt-4">
