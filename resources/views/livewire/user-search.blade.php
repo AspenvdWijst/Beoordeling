@@ -1,5 +1,5 @@
 <div class="bg-white shadow rounded p-4">
-    <h2 class="text-xl font-semibold mb-4 dark:text-black">Zoek hier een gebruiker of klas</h2>
+    <h2 class="text-xl font-semibold mb-4 dark:text-black">Zoek hier een gebruiker</h2>
     <input type="text" wire:model.live.debounce.500ms="search" placeholder="Zoek gebruikers..."
            class="border p-2 rounded w-full dark:text-black">
 

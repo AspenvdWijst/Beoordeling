@@ -1,4 +1,4 @@
-<div class="bg-white shadow rounded p-4 dark:text-black">
+<div class="p-4">
     <h2 class="text-lg font-semibold mb-2">{{ $subject->subject_name }}</h2>
 {{--    @dd($subject->assignments)--}}
     @if ($subject->assignments->isNotEmpty())
