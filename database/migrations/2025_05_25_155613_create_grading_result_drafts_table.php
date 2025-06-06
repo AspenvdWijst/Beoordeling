@@ -18,7 +18,6 @@ return new class extends Migration
             $table->json('draft_data');
             $table->timestamps();
 
-//            $table->unique(['grading_form_id', 'student_id', 'teacher_ids'], 'unique_draft');
         });
     }
 

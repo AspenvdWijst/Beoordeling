@@ -52,6 +52,23 @@ class AdminGradingResults extends Component
             return;
         }
         $result = GradingResult::findOrFail($this->editingResultId);
+
+        // Extract required fields from the JSON data
+        $assignmentId = $result->assignment_id ?? $data['assignment_id'] ?? null;
+        $studentId = $result->student_id ?? $data['student_id'] ?? null;
+        $finalGrade = $data['finalGrade'] ?? null;
+
+        if ($assignmentId && $studentId && $finalGrade !== null) {
+            $grade = Grade::where('assignment_id', $assignmentId)
+                ->where('student_id', $studentId)
+                ->first();
+
+            if ($grade) {
+                $grade->grade = $finalGrade;
+                $grade->save();
+            }
+        }
+
         $result->form_data = $data;
         $result->save();
         session()->flash('success', 'Formulier bijgewerkt.');

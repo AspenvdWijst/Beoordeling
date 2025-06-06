@@ -411,9 +411,7 @@
                     class="rounded-lg p-4 flex items-center gap-2  w-fit min-w-[140px]">
                     <span class="font-semibold text-blue-700">Herkansing:</span>
                     <input wire:model.debounce.500ms="form.retry" type="checkbox" class="h-5 w-5"
-                           @if($locked) disabled style="background-color: #f3f4f6; color: #888;" @endif
-                           @if($this->retryLoaded) disabled style="background-color: #f3f4f6; color: #888;" @endif
-                           @if($this->retryFilled) disabled style="background-color: #f3f4f6; color: #888;" @endif/>
+                           disabled style="background-color: #f3f4f6; color: #888;" />
                 </div>
                 <div
                     class="rounded-lg p-4 flex items-center gap-2 w-fit min-w-[140px]">

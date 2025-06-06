@@ -317,7 +317,6 @@
                                     </div>
                                     <span class="text-2xl font-extrabold">
                                         {{ $form['finalGrade'] ?? '-' }}
-{{--                                        {{ $grade->grade }}--}}
                                     </span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2 shadow-sm w-fit min-w-[220px] bg-white rounded-xl px-6 py-4 border border-gray-200">

@@ -13,10 +13,10 @@ class FormStudentViewController extends Controller
 
         $form = $gradingResult->form_data;
 
-//        $grade = Grade::where('assignment_id', $form['assignment_id'])
-//            ->where('student_id', $gradingResult->student_id)
-//            ->where('grade', $form['finalGrade'])
-//        ->first();
+        $grade = Grade::where('assignment_id', $form['assignment_id'])
+            ->where('student_id', $gradingResult->student_id)
+            ->where('grade', $form['finalGrade'])
+        ->first();
 
         $grandTotal = 0;
         $maxObtainablePoints = 0;
@@ -36,7 +36,7 @@ class FormStudentViewController extends Controller
 
         return view('student.form-student-view', [
             'form' => $form,
-//            'grade' => $grade,
+            'grade' => $grade,
             'grandTotal' => $grandTotal,
             'maxObtainablePoints' => $maxObtainablePoints,
             'minObtainablePoints' => $minObtainablePoints,

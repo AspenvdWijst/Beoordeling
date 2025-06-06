@@ -306,16 +306,16 @@ class GradingTemplate extends Component
                 'form_data' => $finalform,
             ]);
 
-//            Grade::updateOrCreate([
-//               'assignment_id' => $this->form['assignment_id'],
-//                'student_id'=> $this->studentId,
-//                'teacher_1_id' => null,
-//                'teacher_2_id' => null,
-//                'grade' => $finalGrade,
-//                'approved' => 0,
-//                'created_at' => now(),
-//                'updated_at' => now(),
-//            ]);
+            Grade::updateOrCreate(
+                [
+                    'assignment_id' => $this->form['assignment_id'],
+                    'student_id' => $this->studentId,
+                ],
+                [
+                    'grade' => $finalGrade,
+                    'approved' => 0,
+                ]
+            );
 
             $draft->delete();
 
