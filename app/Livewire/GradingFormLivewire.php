@@ -355,6 +355,9 @@ class GradingFormLivewire extends Component
     }
     public function render()
     {
-        return view('livewire.grading-form-livewire');
+        return view('livewire.grading-form-livewire', [
+            'maxObtainablePoints' => $this->maxObtainablePoints,
+            'minObtainablePoints' => $this->minObtainablePoints,
+        ]);
     }
 }

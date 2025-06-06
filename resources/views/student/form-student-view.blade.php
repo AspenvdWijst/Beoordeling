@@ -167,11 +167,21 @@
                             <tr class="border border-gray-400">
                                 <td class="border border-gray-400 p-3 bg-blue-400 text-white font-semibold">Software
                                 </td>
-                                @for($i = 0; $i < 5; $i++)
-                                    <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center">
-                                        {{ $form['competence_profile']['software'][$i] ?? '-' }}
-                                    </td>
-                                @endfor
+                                <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center font-semibold">
+                                    {{ $form['software']['analyse'] }}
+                                </td>
+                                <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center font-semibold">
+                                    {{ $form['software']['advise'] }}
+                                </td>
+                                <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center font-semibold">
+                                    {{ $form['software']['design'] }}
+                                </td>
+                                <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center font-semibold">
+                                    {{ $form['software']['realise'] }}
+                                </td>
+                                <td class="border border-gray-400 p-3 bg-blue-400 text-white text-center font-semibold">
+                                    {{ $form['software']['manage'] }}
+                                </td>
                             </tr>
                             <tr class="border border-gray-400">
                                 <td class="border border-gray-400 p-3 bg-white">Hardware interfacing</td>
@@ -307,11 +317,12 @@
                                     </div>
                                     <span class="text-2xl font-extrabold">
                                         {{ $form['finalGrade'] ?? '-' }}
+{{--                                        {{ $grade->grade }}--}}
                                     </span>
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-2 shadow-sm w-fit min-w-[220px] bg-white rounded-xl px-6 py-4 border border-gray-200">
                                     <span class="font-semibold text-gray-700 mb-2 text-base">Ondertekening</span>
-                                    <div class="flex flex-row gap-6">
+                                    <div class="flex flex-col space-y-4">
                                         @foreach($form['assignment']['teachers'] ?? [] as $teacher)
                                             <div class="flex flex-col items-center bg-gray-50 rounded-xl px-4 py-3 shadow transition hover:shadow-md">
                                                 <div class="mb-2 flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-br from-green-400 to-blue-400 text-white text-lg font-bold shadow-inner">

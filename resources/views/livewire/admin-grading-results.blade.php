@@ -27,7 +27,7 @@
                 <tr>
                     <td class="px-4 py-2">{{ $result->id }}</td>
                     <td class="px-4 py-2">{{ $result->student ? $result->student->name : 'Unknown' }}</td>
-                    <td class="px-4 py-2">{{ $result->gradingForm ? $result->gradingForm->title : 'Unknown' }}</td>
+                    <td class="px-4 py-2">{{ $result->form_data['title'] ?? '' }}</td>
                     <td class="px-4 py-2 flex gap-2">
                         <button wire:click="edit({{ $result->id }})"
                                 class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm transition">

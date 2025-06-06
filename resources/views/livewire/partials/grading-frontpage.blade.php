@@ -61,13 +61,13 @@
             <tr class="border border-gray-400">
                 <td class="border border-gray-400 p-3 bg-white"></td>
                 <td class="border border-gray-400 bg-white text-right">
-                    <span class="font-bold">{{ $maxObtainablePoints }}</span>
+                    <span class="font-bold">{{ $this->maxObtainablePoints }}</span>
                 </td>
                 <td class="border border-gray-400 p-3 bg-white text-right">
                     <span class="font-bold">0</span>
                 </td>
                 <td class="border border-gray-400 p-3 bg-white text-right">
-                    <span class="font-bold">{{ $minObtainablePoints }}</span>
+                    <span class="font-bold">{{ $this->minObtainablePoints }}</span>
                 </td>
             </tr>
             </tbody>

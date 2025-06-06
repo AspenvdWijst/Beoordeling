@@ -82,8 +82,8 @@
                 </div>
 
                 <div>
-                    @include('livewire.partials.grading-frontpage', ['tables' => $tables, 'maxObtainablePoints' => $this->getMaxObtainablePointsProperty(),
-            'minObtainablePoints' => $this->minObtainablePoints])
+                    @include('livewire.partials.grading-frontpage', [
+                        'tables' => $tables,])
                 </div>
 
                 <button type="button" wire:click="addTable" class="mb-4 px-4 py-2 bg-blue-500 text-white rounded">

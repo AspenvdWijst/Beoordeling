@@ -1,6 +1,6 @@
 <div class="p-4 h-full flex flex-col">
     <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-        {{ __('Recent Grading Forms') }}
+        {{ __('Recent beoordeelde rubrics') }}
     </h3>
 
     @if($recentGradingForms->count() > 0)
@@ -21,9 +21,9 @@
                     <div class="ml-3 flex items-center">
                         @if($form->form_data['finalGrade'])
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                        @if($form->form_data['finalGrade'] >= 9) bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200
-                        @elseif($form->form_data['finalGrade'] >= 8) bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200
-                        @elseif($form->form_data['finalGrade'] >= 7) bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200
+                        @if($form->form_data['finalGrade'] >= 8) bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200
+                        @elseif($form->form_data['finalGrade'] >= 7) bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200
+                        @elseif($form->form_data['finalGrade'] >= 5.5) bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200
                         @else bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200
                         @endif">
                         {{ $form->form_data['finalGrade'] }}
@@ -40,15 +40,7 @@
                 </div>
             </a>
         @endforeach
-
-        @if($recentGradingForms->count() >= 5)
-            <div class="mt-4 pt-3 border-t border-neutral-200 dark:border-neutral-700">
-                <a href="{{ route('student.grading-forms.index') }}"
-                   class="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium">
-                    {{ __('Zie alle formulieren') }} →
-                </a>
-            </div>
-        @endif
+        {{$recentGradingForms->links()}}
     @else
         <div class="flex-1 flex items-center justify-center">
             <div class="text-center">

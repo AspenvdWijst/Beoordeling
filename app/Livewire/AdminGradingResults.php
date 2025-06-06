@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Grade;
 use App\Models\GradingResult;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;

@@ -10,7 +10,6 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\GradingTemplateList;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\GradingTemplateList;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 

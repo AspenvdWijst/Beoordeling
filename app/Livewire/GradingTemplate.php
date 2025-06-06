@@ -28,6 +28,10 @@ class GradingTemplate extends Component
 
     public $teacherApprovals = [];
 
+    public bool $retryLoaded = false;
+
+    public bool $retryFilled = false;
+
     public function mount($gradingFormId)
     {
         $this->students = User::where('role_id', 1)->get();
@@ -302,6 +306,17 @@ class GradingTemplate extends Component
                 'form_data' => $finalform,
             ]);
 
+//            Grade::updateOrCreate([
+//               'assignment_id' => $this->form['assignment_id'],
+//                'student_id'=> $this->studentId,
+//                'teacher_1_id' => null,
+//                'teacher_2_id' => null,
+//                'grade' => $finalGrade,
+//                'approved' => 0,
+//                'created_at' => now(),
+//                'updated_at' => now(),
+//            ]);
+
             $draft->delete();
 
             session()->flash('success', 'Definitief opgeslagen! Alle docenten hebben goedgekeurd.');
@@ -379,6 +394,58 @@ class GradingTemplate extends Component
     {
         $grandTotal = $this->getGrandTotalPoints();
         $this->form['finalGrade'] = $this->pointsToGrade($grandTotal);
+    }
+
+    public function updatedStudentId($value)
+    {
+        $this->studentId = $value;
+
+        $existingFalse = GradingResult::where('grading_form_id', $this->gradingFormId)
+            ->where('student_id', $this->studentId)
+            ->where(function($q) {
+                $q->where('form_data->retry', false)->orWhereNull('form_data->retry');
+            })
+            ->first();
+
+        $existingTrue = GradingResult::where('grading_form_id', $this->gradingFormId)
+            ->where('student_id', $this->studentId)
+            ->where('form_data->retry', true)
+            ->first();
+
+        if($existingTrue) {
+            $this->retryFilled = true;
+        } else {
+            $this->retryFilled = false;
+        }
+
+        if ($existingFalse && $existingTrue) {
+            session()->flash('error', 'De mogelijke rubrieken zijn al gemaakt.');
+            $this->dispatch('delayed-redirect', url()->route('dashboard'));
+            return;
+        }
+
+        $this->loadExistingResultForStudent();
+    }
+
+    private function loadExistingResultForStudent()
+    {
+        $this->retryLoaded = false;
+        $existingResult = GradingResult::where('grading_form_id', $this->gradingFormId)
+            ->where('student_id', (int) $this->studentId)
+            ->first();
+
+        if (
+            $existingResult &&
+            isset($existingResult->form_data['retry']) &&
+            (int)$existingResult->form_data['retry'] === 0
+        ) {
+            $formData = $existingResult->form_data;
+            $formData['retry'] = true;
+            $formData['title'] = 'Herkansing: ' . $formData['title'];
+            $formData['grading_date'] = '';
+            $this->form = $formData;
+            $this->retryLoaded = true;
+        }
     }
 
 
