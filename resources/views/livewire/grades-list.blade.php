@@ -44,7 +44,7 @@
                         <br>
                 @else
                         <form action="{{ route('grades.submit', $grade->id) }}" method="POST">
-                            <input type="text" name="newGrade" class="border p-2 rounded dark:text-black" placeholder="Nieuw cijfer" wire:model="newGrade" autocomplete="off">
+                            <input type="text" name="newGrade" class="border p-2 rounded dark:text-black" placeholder="Nieuw cijfer" wire:model="newGrade" autocomplete="off" required>
                             @csrf
                             <button type="submit" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">Lever in</button>
                         </form>

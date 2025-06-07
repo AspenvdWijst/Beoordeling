@@ -38,9 +38,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
-Route::middleware(['auth', 'verified', Teacher::class])->group(function () {
-    Route::post('/grades/{grade}/approve', [ApprovalController::class, 'approve'])->name('grades.approve');
-    Route::post('/grades/{grade}/submit', [ApprovalController::class, 'submit'])->name('grades.submit');
+Route::middleware(['auth', 'verified', 'teacher'])->group(function () {
+
 
     Route::get('/teacher/subjects/{subject}', [TeacherController::class, 'subject'])->name('teacher.subject');
     Route::get('/teacher/subjects/{subject}/assignments/new', [TeacherController::class, 'addAssignment'])->name('new.assignment');
@@ -50,7 +49,7 @@ Route::middleware(['auth', 'verified', Teacher::class])->group(function () {
     Route::get('/assignment/update/{subject}/{assignment}', [AssignmentController::class, 'update'])->name('update.assignment');
 });
 
-Route::middleware(['auth', 'verified', Admin::class])->group(function () {
+Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/user/{userid}', ['userid'])->name('users.add');
 
     Route::get('/users/add', [UserController::class, 'add'])->name('users.add');
@@ -60,6 +59,11 @@ Route::middleware(['auth', 'verified', Admin::class])->group(function () {
     Route::get('/user/{user}/update', [UserController::class, 'update'])->name('users.update');
     Route::post('/user/{user}/save', [UserController::class, 'save'])->name('users.save');
     Route::get('/user/{user}/delete', [UserController::class, 'delete'])->name('users.delete');
+});
+
+Route::middleware(['auth', 'verified', 'teacher.or.admin'])->group(function () {
+    Route::post('/grades/{grade}/approve', [ApprovalController::class, 'approve'])->name('grades.approve');
+    Route::post('/grades/{grade}/submit', [ApprovalController::class, 'submit'])->name('grades.submit');
 });
 
 require __DIR__.'/auth.php';
