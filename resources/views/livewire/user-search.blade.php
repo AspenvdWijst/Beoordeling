@@ -7,7 +7,7 @@
         <ul class="mt-2 border rounded p-2 bg-white">
             @forelse($users as $user)
                 <li class="p-1 border-b last:border-0 dark:text-black">{{ $user->name }}
-                    <a href="{{route("users.update", $user->id)}}" class="px-6 py-3 ml-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <a href="{{route("users.update", $user->id)}}" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
                         Bewerk
                     </a>
                 </li>
@@ -19,7 +19,7 @@
     <div class="pt-2">
         <form action="{{ route('users.add') }}" method="POST">
             @csrf
-            <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button type="submit" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
                 Maak nieuwe gebruiker
             </button>
         </form>

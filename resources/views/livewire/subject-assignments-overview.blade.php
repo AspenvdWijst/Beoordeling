@@ -18,7 +18,7 @@
                             Bewerk opdracht
                         </a>
                     @endif
-                    <a href="{{ route('student.download.grade', [$subject->id, $assignment->id]) }}">download</a>
+                    <a href="{{ route('student.download.grade', [$subject->id, $assignment->id]) }}" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">download</a>
                 </div>
             @endforeach
         </ul>

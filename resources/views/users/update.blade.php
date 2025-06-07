@@ -31,7 +31,7 @@
         <input type="email" id="user_email" name="user_email" required class="border mt-2 p-2 rounded" value="{{$user->email}}">
 
         <br>
-        <input type="submit" value="Update" class="px-6 py-3 mt-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="submit" value="Update" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
     </form>
 
     <h2 class="font-bold mt-3">Verwijder:</h2>

@@ -25,7 +25,7 @@
                         @if (!$userHasApproved)
                             <form action="{{ route('grades.approve', $grade->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <button type="submit" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
                                     Keur goed
                                 </button>
                             </form>

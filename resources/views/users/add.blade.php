@@ -20,7 +20,7 @@
         <input type="email" id="user_email" name="user_email" required class="border mt-2 p-2 rounded">
 
         <br>
-        <input type="submit" class="px-6 py-3 mt-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="submit" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
     </form>
 </x-layouts.app>
 
