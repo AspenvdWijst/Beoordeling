@@ -9,7 +9,7 @@
                 <div class="flex justify-between">
                     <strong class="p-2.5 border-b last:border-0 dark:text-black">{{ $user->name }}</strong>
                     <a href="{{ route('add.student.subject', [$subject->id, $user->id] ) }}" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
-                        Voeg student toe
+                        Voeg student toe aan klas
                     </a>
                 </div>
             @empty
