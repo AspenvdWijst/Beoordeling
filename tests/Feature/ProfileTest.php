@@ -13,15 +13,19 @@ class ProfileTest extends TestCase
 
     public function test_profile_page_is_displayed(): void
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
 
-        $response = $this->actingAs($user)->get('/profile');
+        $response = $this->actingAs($user)->get('/settings/profile');
 
         $response
             ->assertOk()
-            ->assertSeeVolt('profile.update-profile-information-form')
-            ->assertSeeVolt('profile.update-password-form')
-            ->assertSeeVolt('profile.delete-user-form');
+            ->assertSeeVolt('settings.delete-user-form')
+            ->assertSee('Profiel')
+            ->assertSee($user->name)
+            ->assertSee($user->email)
+            ->assertSee('Opslaan');
     }
 
     public function test_profile_information_can_be_updated(): void

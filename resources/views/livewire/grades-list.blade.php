@@ -34,7 +34,7 @@
                         @if ($approverCount === 2)
                             <form action="{{ route('grades.submit', $grade->id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success">Lever in</button>
                             </form>
                         @elseif ($approverCount > 2)
                             <p class="text-success">Al goedgekeurd!</p>
@@ -46,7 +46,7 @@
                         <form action="{{ route('grades.submit', $grade->id) }}" method="POST">
                             <input type="text" name="newGrade" class="border p-2 rounded dark:text-black" placeholder="Nieuw cijfer" wire:model="newGrade" autocomplete="off">
                             @csrf
-                            <button type="submit" class="btn btn-success text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Lever in</button>
+                            <button type="submit" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">Lever in</button>
                         </form>
                 @endif
                     </div>
