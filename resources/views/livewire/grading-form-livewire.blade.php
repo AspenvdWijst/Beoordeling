@@ -146,7 +146,7 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($table['rows'] as $rowIndex => $row)
+                                        @foreach (is_array($table['rows'] ?? null) ? $table['rows'] : [] as $rowIndex => $row)
                                             <tr>
                                                 <td class="border border-gray-300 p-2 bg-gray-100">
                                                     <input type="text"
@@ -341,7 +341,8 @@
                                                     @enderror
                                                 </div>
                                                 <hr class="border-black my-3">
-                                                @foreach($table['knockoutCriteria'] as $koIndex => $criteria)
+{{--                                                @foreach($table['knockoutCriteria'] as $koIndex => $criteria)--}}
+                                                @foreach(is_array($table['knockoutCriteria']) ? $table['knockoutCriteria'] : [] as $koIndex => $criteria)
                                                     <div class="flex items-center justify-between mb-3 last:mb-0">
                                                         <input type="text"
                                                                wire:model="tables.{{ $tableIndex }}.knockoutCriteria.{{ $koIndex }}.text"
