@@ -21,7 +21,7 @@ class AssignmentFactory extends Factory
     public function definition()
     {
         return [
-            'subject_id' => Subject::inRandomOrder()->first()?->id ?? Subject::factory(),
+            'subject_id' => Subject::inRandomOrder()->first()?->id ?? Subject::factory()->create()->id,
             'assignment_name' => $this->faker->sentence(3),
             'assignment_info' => $this->faker->paragraph,
         ];

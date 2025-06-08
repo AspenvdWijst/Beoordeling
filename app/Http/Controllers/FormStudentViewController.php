@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Grade;
 use App\Models\GradingResult;
 
 class FormStudentViewController extends Controller
@@ -11,6 +12,11 @@ class FormStudentViewController extends Controller
         $gradingResult = GradingResult::findOrFail($id);
 
         $form = $gradingResult->form_data;
+
+        $grade = Grade::where('assignment_id', $form['assignment_id'])
+            ->where('student_id', $gradingResult->student_id)
+            ->where('grade', $form['finalGrade'])
+        ->first();
 
         $grandTotal = 0;
         $maxObtainablePoints = 0;
@@ -30,6 +36,7 @@ class FormStudentViewController extends Controller
 
         return view('student.form-student-view', [
             'form' => $form,
+            'grade' => $grade,
             'grandTotal' => $grandTotal,
             'maxObtainablePoints' => $maxObtainablePoints,
             'minObtainablePoints' => $minObtainablePoints,

@@ -143,7 +143,8 @@
                                             wire:model.debounce.500ms="form.tables.{{ $tableIndex }}.criteria_rows.{{ $rowIndex }}.remarks"
                                             class="w-full border rounded p-1 text-xs resize-y"
                                             rows="2"
-                                            placeholder="Opmerking..."></textarea>
+                                            placeholder="Opmerking..."
+                                            @if($hasApproved) disabled style="background-color: #f3f4f6; color: #888;" @endif></textarea>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -169,7 +170,8 @@
                                                         <span>{{ $table['deliverable_text'] ?? '' }}</span>
                                                         <input type="checkbox"
                                                                wire:model.debounce.500ms="form.tables.{{ $tableIndex }}.deliverable_checked"
-                                                               class="h-5 w-5 text-blue-600 rounded border-gray-300">
+                                                               class="h-5 w-5 text-blue-600 rounded border-gray-300"
+                                                               @if($hasApproved) disabled style="background-color: #f3f4f6; color: #888;" @endif/>
                                                     </div>
                                                     <hr class="border-black my-3">
                                                     @if(isset($table['knockoutcriteria']))
@@ -179,7 +181,8 @@
                                                                 <span>{{ $criteria['text'] ?? '' }}</span>
                                                                 <input type="checkbox"
                                                                        wire:model.debounce.500ms="form.tables.{{ $tableIndex }}.knockoutcriteria.{{ $koIndex }}.checked"
-                                                                       class="h-5 w-5 text-blue-600 rounded border-gray-300">
+                                                                       class="h-5 w-5 text-blue-600 rounded border-gray-300"
+                                                                       @if($hasApproved) disabled style="background-color: #f3f4f6; color: #888;" @endif/>
                                                             </div>
                                                         @endforeach
                                                     @endif

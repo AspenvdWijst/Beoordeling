@@ -14,8 +14,7 @@ class DashboardRecentGradingForms extends Component
         $recentGradingForms = GradingResult::with(['gradingForm', 'student'])
             ->where('student_id', Auth::id())
             ->latest()
-            ->take(5)
-            ->get();
+            ->paginate(5);
 
         return view('livewire.dashboard-recent-grading-forms', [
             'recentGradingForms' => $recentGradingForms,
