@@ -4,7 +4,7 @@
         @forelse ($recentTeachers as $teacher)
             <li class="border-b py-2 dark:text-black">
                 <strong>{{ $teacher->name }}</strong> - {{ $teacher->email }}
-                <div class="text-sm text-gray-500">{{ $teacher->created_at->diffForHumans() }}</div>
+                <div class="text-sm text-gray-500">{{ $teacher->created_at->locale('nl')->diffForHumans() }}</div>
             </li>
         @empty
             <li>Geen accounts gevonden.</li>

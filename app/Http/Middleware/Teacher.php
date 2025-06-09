@@ -16,7 +16,7 @@ class Teacher
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user()->role_id !== 2){
-            return response('Unauthorized.', 401);
+            return redirect('/');
         }
         return $next($request);
     }

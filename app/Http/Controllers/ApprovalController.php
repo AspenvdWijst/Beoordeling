@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use Illuminate\Support\Facades\DB;
-use App\Models\Approval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,13 +19,14 @@ class ApprovalController extends Controller
         if ($grade->teacher1_id === $user->id || $grade->teacher2_id === $user->id) {
             return back()->with('error', 'You have already approved this item.');
         }
-
-        if (empty($grade->teacher1_id)) {
+        elseif (empty($grade->teacher1_id)) {
             $grade->teacher1_id = $user->id;
         }
-
         elseif (empty($grade->teacher2_id)) {
             $grade->teacher2_id = $user->id;
+        }
+        else{
+            return back()->with('error', 'This item has already been approved.');
         }
 
         $grade->save();

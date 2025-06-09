@@ -11,6 +11,23 @@ class ProfileTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_profile_page_is_displayed(): void
+    {
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->get('/settings/profile');
+
+        $response
+            ->assertOk()
+            ->assertSeeVolt('settings.delete-user-form')
+            ->assertSee('Profiel')
+            ->assertSee($user->name)
+            ->assertSee($user->email)
+            ->assertSee('Opslaan');
+    }
+
     public function test_profile_information_can_be_updated(): void
     {
         $user = User::factory()->create();
