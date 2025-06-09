@@ -12,16 +12,14 @@ class GradingFormLivewireTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
-    public function it_mounts_with_default_data()
+    public function test_it_mounts_with_default_data()
     {
         Livewire::test(GradingFormLivewire::class)
             ->assertSet('formTitle', '')
             ->assertSet('tables.0.title', '');
     }
 
-    /** @test */
-    public function it_mounts_with_draft_data()
+    public function test_it_mounts_with_draft_data()
     {
         $assignment = Assignment::factory()->create();
         $draftData = [
@@ -34,8 +32,7 @@ class GradingFormLivewireTest extends TestCase
             ->assertSet('selectedAssignment', $assignment->id);
     }
 
-    /** @test */
-    public function it_can_add_and_remove_tables()
+    public function test_it_can_add_and_remove_tables()
     {
         $component = Livewire::test(GradingFormLivewire::class);
         $component->call('addTable');
@@ -45,8 +42,7 @@ class GradingFormLivewireTest extends TestCase
         $component->assertCount('tables', 1);
     }
 
-    /** @test */
-    public function it_can_add_and_remove_rows()
+    public function test_it_can_add_and_remove_rows()
     {
         $component = Livewire::test(GradingFormLivewire::class);
         $component->call('addRow', 0);
@@ -56,8 +52,7 @@ class GradingFormLivewireTest extends TestCase
         $component->assertCount('tables.0.rows', 1);
     }
 
-    /** @test */
-    public function it_can_add_and_remove_knockout_criteria()
+    public function test_it_can_add_and_remove_knockout_criteria()
     {
         $component = Livewire::test(GradingFormLivewire::class);
 
@@ -67,8 +62,7 @@ class GradingFormLivewireTest extends TestCase
         $component->assertCount('tables.0.knockoutCriteria', 1);
     }
 
-    /** @test */
-    public function it_validates_required_fields()
+    public function test_it_validates_required_fields()
     {
         $component = Livewire::test(GradingFormLivewire::class);
         $component->set('formTitle', '');
@@ -78,8 +72,7 @@ class GradingFormLivewireTest extends TestCase
             ->assertHasErrors(['formTitle', 'selectedAssignment']);
     }
 
-    /** @test */
-    public function it_can_save_a_draft()
+    public function test_it_can_save_a_draft()
     {
         $assignment = Assignment::factory()->create();
         $component = Livewire::test(GradingFormLivewire::class);
@@ -92,8 +85,7 @@ class GradingFormLivewireTest extends TestCase
         ]);
     }
 
-    /** @test */
-    public function it_can_save_a_form()
+    public function test_it_can_save_a_form()
     {
         $assignment = Assignment::factory()->create();
 

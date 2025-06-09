@@ -1,14 +1,13 @@
 <?php
 
-namespace Tests\Unit\Livewire;
+namespace Tests\Unit;
 
 use App\Livewire\GradingTemplate;
 use PHPUnit\Framework\TestCase;
 
 class GradingTemplateTest extends TestCase
 {
-    /** @test */
-    public function points_to_grade_converts_correctly()
+    public function test_points_to_grade_converts_correctly()
     {
         $component = new GradingTemplate();
 
@@ -20,8 +19,7 @@ class GradingTemplateTest extends TestCase
         $this->assertEquals(10.0, $component->pointsToGrade(150));
     }
 
-    /** @test */
-    public function get_total_points_calculates_correctly()
+    public function test_get_total_points_calculates_correctly()
     {
         $component = new GradingTemplate();
 
@@ -39,8 +37,7 @@ class GradingTemplateTest extends TestCase
         $this->assertEquals(8, $component->getTotalPoints(0));
     }
 
-    /** @test */
-    public function get_grand_total_points_sums_all_tables()
+    public function test_get_grand_total_points_sums_all_tables()
     {
         $component = new GradingTemplate();
 
@@ -64,8 +61,7 @@ class GradingTemplateTest extends TestCase
         $this->assertEquals(14, $component->getGrandTotalPoints());
     }
 
-    /** @test */
-    public function get_max_obtainable_points_calculates_correctly()
+    public function test_get_max_obtainable_points_calculates_correctly()
     {
         $component = new GradingTemplate();
 
@@ -79,8 +75,7 @@ class GradingTemplateTest extends TestCase
         $this->assertEquals(30, $component->getMaxObtainablePointsProperty());
     }
 
-    /** @test */
-    public function get_min_obtainable_points_calculates_correctly()
+    public function test_get_min_obtainable_points_calculates_correctly()
     {
         $component = new GradingTemplate();
 

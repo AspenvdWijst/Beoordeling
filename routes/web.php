@@ -48,6 +48,7 @@ Route::middleware(['auth', 'verified', 'teacher'])->group(function () {
     Route::get('/teacher/subjects/{subject}/students/{student}', [SubjectController::class, 'student'])->name('add.student.subject');
     Route::get('/assignment/add/{subject}', [AssignmentController::class, 'create'])->name('submit.new.assignment');
     Route::get('/assignment/update/{subject}/{assignment}', [AssignmentController::class, 'update'])->name('update.assignment');
+});
 
 Route::middleware(['auth', 'verified', 'admin'])->group(function () {
     Route::get('/user/{userid}', ['userid'])->name('users.add');

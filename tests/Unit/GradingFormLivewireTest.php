@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Livewire;
+namespace Tests\Unit;
 
 use App\Livewire\GradingFormLivewire;
 use Illuminate\Foundation\Testing\WithFaker;
