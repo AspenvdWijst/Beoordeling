@@ -30,7 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/student/subjects/{subject}', [StudentController::class, 'subject'])->name('student.subject');
     Route::get('/student/subjects/{subject}/assignments/{assignment}/download', [StudentController::class, 'download'])->name('student.download.grade');
 
-    Route::get('/student/form/{id}', [FormStudentViewController::class, 'show'])->name('student-form.show');
+    Route::get('/student/form/{id}', [FormStudentViewController::class, 'download'])->name('student-form.show');
 
 });
 

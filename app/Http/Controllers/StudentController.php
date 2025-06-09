@@ -22,7 +22,4 @@ class StudentController extends Controller
             ->landscape()
             ->name('invoice-2023-04-10.pdf');
     }
-
-
-
 }

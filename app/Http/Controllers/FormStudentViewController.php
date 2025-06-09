@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\GradingResult;
+use function Spatie\LaravelPdf\Support\pdf;
 
 class FormStudentViewController extends Controller
 {
-    public function show($id)
+    public function download($id)
     {
         $gradingResult = GradingResult::findOrFail($id);
 
@@ -34,12 +35,16 @@ class FormStudentViewController extends Controller
             }
         }
 
-        return view('student.form-student-view', [
+        return pdf()
+            ->view('student.form-student-view', [
             'form' => $form,
             'grade' => $grade,
             'grandTotal' => $grandTotal,
             'maxObtainablePoints' => $maxObtainablePoints,
             'minObtainablePoints' => $minObtainablePoints,
-        ]);
+                ])
+            ->format('a3')
+            ->landscape()
+            ->name('beoordeling.pdf');
     }
 }
