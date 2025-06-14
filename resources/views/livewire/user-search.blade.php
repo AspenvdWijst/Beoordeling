@@ -6,8 +6,8 @@
     @if($search)
         <ul class="mt-2 border rounded p-2 bg-white">
             @forelse($users as $user)
-                <li class="p-1 border-b last:border-0 dark:text-black">{{ $user->name }}
-                    <a href="{{route("users.update", $user->id)}}" class="px-6 py-3 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
+                <li class="p-2 border-b last:border-0 dark:text-black">{{ $user->name }}
+                    <a href="{{route("users.update", $user->id)}}" class="px-4 py-2 mb-3 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">
                         Bewerk
                     </a>
                 </li>
