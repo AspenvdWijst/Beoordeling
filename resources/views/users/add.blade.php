@@ -1,5 +1,5 @@
 <x-layouts.app>
-    <h1 class="text-xl font-semibold mb-4 dark:text-black">Add a new user</h1>
+    <h1 class="text-xl font-semibold mb-4 dark:text-black">Voeg een gebruiker toe</h1>
     <form method="POST" action="save">
         @csrf
         Rol
