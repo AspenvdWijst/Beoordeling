@@ -18,9 +18,6 @@
                             Bewerk opdracht
                         </a>
                     @endif
-                    @if(auth()->user()->role_id == 1)
-                    <a href="{{ route('student-form.show', [$subject->id]) }}" class="px-6 py-3 ml-2 mt-2 bg-windesheim text-white rounded-lg shadow-md hover:bg-windesheim-hover focus:outline-none focus:ring-2 focus:ring-windesheim-focus">download</a>
-                    @endif
                 </div>
             @endforeach
         </ul>
