@@ -71,7 +71,7 @@ class FormStudentViewController extends Controller
                 'maxObtainablePoints' => $maxObtainablePoints,
                 'minObtainablePoints' => $minObtainablePoints,
             ])
-            ->format('a3')
+            ->format('a4')
             ->landscape()
             ->name('beoordeling.pdf');
     }
