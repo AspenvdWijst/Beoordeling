@@ -19,9 +19,8 @@ class GradesList extends Component
         if ($user->role_id === 2) {
             $assignmentIds = $user->assignments()->pluck('assignments.id')->values()->all();
 
-
-
             $this->grades = Grade::whereIn('assignment_id', $assignmentIds)
+                ->where('approved', false)
                 ->get();
         } else {
             $this->grades = $grades ?? Grade::with(['student', 'assignment'])->get();
