@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\GradingResult;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cache;
 use function Spatie\LaravelPdf\Support\pdf;
 
@@ -50,6 +49,8 @@ class FormStudentViewController extends Controller
 
     private function generatePdf($form, $grade, $grandTotal, $maxObtainablePoints, $minObtainablePoints)
     {
+        ini_set('memory_limit', '256M');
+
         return pdf()
             ->view('student.form-student-view', [
                 'form' => $form,
@@ -59,7 +60,7 @@ class FormStudentViewController extends Controller
                 'minObtainablePoints' => $minObtainablePoints,
             ])
             ->format('a4')
-            ->landscape()
+            ->portrait()
             ->name('beoordeling.pdf');
     }
 }
