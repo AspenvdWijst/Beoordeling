@@ -14,16 +14,19 @@ class AssignmentStudentTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $assignments = Assignment::all();
-        $students = DB::table("users")->where("role_id", '1')->get();
+        DB::table('assignment_student')->insert([
+            'assignment_id' => 1,
+            'student_id' => 5,
+        ]);
 
-        foreach ($students as $student) {
-            foreach ($assignments as $assignment) {
-                DB::table('assignment_student')->insert([
-                    'assignment_id' => $assignment->id,
-                    'student_id' => $student->id,
-                ]);
-            }
-        }
+        DB::table('assignment_student')->insert([
+            'assignment_id' => 1,
+            'student_id' => 6,
+        ]);
+
+        DB::table('assignment_student')->insert([
+            'assignment_id' => 1,
+            'student_id' => 7,
+        ]);
     }
 }

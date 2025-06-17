@@ -15,17 +15,19 @@ class StudentSubjectTableSeeder extends Seeder
      */
     public function run()
     {
-        $students = DB::table("users")->where("role_id", '1')->get();
-        $subjects = Subject::all();
+        DB::table('student_subject')->insert([
+            'student_id' => 5,
+            'subject_id' => 1,
+        ]);
 
-        foreach ($subjects as $subject) {
-            foreach ($students as $student) {
-                DB::table('student_subject')->insert([
-                    'student_id' => $student->id,
-                    'subject_id' => $subject->id,
-                ]);
-            }
-        }
+        DB::table('student_subject')->insert([
+            'student_id' => 6,
+            'subject_id' => 1,
+        ]);
 
+        DB::table('student_subject')->insert([
+            'student_id' => 7,
+            'subject_id' => 1,
+        ]);
     }
 }

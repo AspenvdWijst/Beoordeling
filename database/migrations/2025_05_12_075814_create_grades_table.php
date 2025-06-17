@@ -20,7 +20,6 @@ return new class extends Migration
             $table->float('grade')->nullable();
             $table->boolean('approved')->default(false);
             $table->timestamps();
-            $table->unique(['assignment_id', 'student_id'], 'unique_assignment_student');
         });
     }
 

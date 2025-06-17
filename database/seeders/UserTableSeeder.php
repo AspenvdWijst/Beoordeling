@@ -14,6 +14,7 @@ class UserTableSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
+            'id' => 1,
             'name' => 'Admin',
             'email' => 'admin@windesheim.nl',
             'password' => 'admin',
@@ -21,33 +22,51 @@ class UserTableSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'name' => 'Admin2',
-            'email' => 'admin2@windesheim.nl',
+            'id' => 2,
+            'name' => 'Beheerder',
+            'email' => 'beheerder@windesheim.nl',
             'password' => 'admin',
             'role_id' => 3
         ]);
 
         User::factory()->create([
-            'name' => 'Teacher',
-            'email' => 'teacher@windesheim.nl',
+            'id' => 3,
+            'name' => 'Jan Zuur',
+            'email' => 'jan@windesheim.nl',
             'password' => 'teacher',
             'role_id' => 2
         ]);
 
         User::factory()->create([
-            'name' => 'Teacher2',
-            'email' => 'teacher2@windesheim.nl',
+            'id' => 4,
+            'name' => 'Arie Ismaiel',
+            'email' => 'arie@windesheim.nl',
             'password' => 'teacher2',
             'role_id' => 2
         ]);
 
         User::factory()->create([
-            'name' => 'Student',
-            'email' => 'student@windesheim.nl',
+            'id' => 5,
+            'name' => 'Aspen van der Wijst',
+            'email' => 'aspen@windesheim.nl',
             'password' => 'student',
             'role_id' => 1
         ]);
 
-        User::factory()->count(20)->create();
+        User::factory()->create([
+            'id' => 6,
+            'name' => 'Ruben van der Ark',
+            'email' => 'ruben@windesheim.nl',
+            'password' => 'student',
+            'role_id' => 1
+        ]);
+
+        User::factory()->create([
+            'id' => 7,
+            'name' => 'Rob Loeffen',
+            'email' => 'rob@windesheim.nl',
+            'password' => 'student',
+            'role_id' => 1
+        ]);
     }
 }

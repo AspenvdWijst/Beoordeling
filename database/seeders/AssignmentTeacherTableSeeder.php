@@ -14,16 +14,14 @@ class AssignmentTeacherTableSeeder extends Seeder
      */
     public function run(): void
     {
-        $assignments = Assignment::all();
-        $teachers = DB::table("users")->where("role_id", '2')->get();
+        DB::table('assignment_teacher')->insert([
+            'assignment_id' => 1,
+            'teacher_id' => 3,
+        ]);
 
-        foreach ($teachers as $teacher) {
-            foreach ($assignments as $assignment) {
-                DB::table('assignment_teacher')->insert([
-                    'assignment_id' => $assignment->id,
-                    'teacher_id' => $teacher->id,
-                ]);
-            }
-        }
+        DB::table('assignment_teacher')->insert([
+            'assignment_id' => 1,
+            'teacher_id' => 4,
+        ]);
     }
 }

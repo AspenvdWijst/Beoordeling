@@ -15,16 +15,14 @@ class SubjectTeacherTableSeeder extends Seeder
      */
     public function run()
     {
-        $subjects = Subject::all();
-        $teachers = DB::table("users")->where("role_id", '2')->get();
+        DB::table('subject_teacher')->insert([
+            'subject_id' => 1,
+            'teacher_id' => 4,
+        ]);
 
-        foreach ($subjects as $subject) {
-            foreach ($teachers as $teacher) {
-                DB::table('subject_teacher')->insert([
-                    'subject_id' => $subject->id,
-                    'teacher_id' => $teacher->id,
-                ]);
-            }
-        }
+        DB::table('subject_teacher')->insert([
+            'subject_id' => 1,
+            'teacher_id' => 3,
+        ]);
     }
 }
