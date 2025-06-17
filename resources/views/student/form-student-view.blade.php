@@ -430,7 +430,7 @@
                                 <td class="bg-gray"></td>
                             </tr>
                             <tr>
-                                <td colspan="3">{{ $table['description_1'] ?? '' }}</td>
+                                <td colspan="3">{!! $table['description_1'] ?? '' !!}</td>
                                 <td colspan="4">
                                     <div class="flex-row mb-3">
                                         <span>{{ $table['deliverable_text'] ?? '' }}</span>
@@ -460,7 +460,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="7">{{ $table['description_2'] ?? '' }}</td>
+                                <td colspan="7">{!! $table['description_2'] ?? '' !!}</td>
                             </tr>
                             </tbody>
                         </table>
